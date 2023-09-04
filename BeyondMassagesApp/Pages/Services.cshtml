@@ -1,0 +1,101 @@
+﻿@page
+@model ServicesModel
+@{
+    ViewData["Title"] = "Services";
+}
+
+<section class="d-flex align-items-center hero-section bg-primary py-5">
+    <div class="container">
+        <div class="row text-center">
+            <h1 class="display-5 fw-normal hero-section-title">Services</h1>
+        </div>
+    </div>
+</section>
+
+@*<section class="d-flex align-items-center bg-primary py-5" style="max-height: 25vh">
+    <div class="container">
+        <div class="row hero-section text-center">
+            <h1 class="display-5 fw-normal hero-section-title">Services</h1>
+        </div>
+    </div>
+</section>
+
+*@@*<section class="bg-primary-subtle py-5">
+    <div class="container">
+        <div class="row hero-section-title text-center">
+            <div class="col py-5">
+                <h1 class="display-3">Services</h1>
+            </div>
+        </div>
+    </div>
+*@
+
+<section class="bg-light-subtle py-5">
+    <div class="container">
+        <div class="row d-flex justify-content-evenly py-3">
+            <div class="col-5">
+                <img class="img-fluid" src="~/images/pexels-andrea-piacquadio-3764568-resized.jpg"/>
+            </div>
+            <div class="col-5 d-flex flex-column justify-content-center border border-4 border-start-0 border-bottom-0">
+               <h4>Service 1</h4>
+               <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                  incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim 
+                  neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
+               </p>
+               <div>
+                    <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceOne">Read More</a>
+@*                    <button class="btn btn-secondary" type="button">Read More</button>
+*@               </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly py-3">
+            <div class="col-5 d-flex flex-column justify-content-center border border-4 border-bottom-0 border-top-0 border-end-0">
+                <h4>Service 2</h4>
+                <div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
+                        neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
+                    </p>
+                    <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceTwo">Read More</a>
+                </div>
+            </div>
+            <div class="col-5">
+                <img class="img-fluid" src="~/images/pexels-antoni-shkraba-4599374-resized.jpg">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly py-3">
+            <div class="col-5">
+                <img class="img-fluid" src="~/images/pexels-arina-krasnikova-6663378-resized.jpg" />
+            </div>
+            <div class="col-5 d-flex flex-column justify-content-center border border-4 border-bottom-0 border-top-0 border-start-0">
+                <h4>Service 3</h4>
+                <p>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                   incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
+                   neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
+                </p>
+                <div>
+                    <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceThree">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly py-3">
+            <div class="col-5 d-flex flex-column justify-content-center border border-4 border-top-0 border-end-0">
+                <h4>Service 4</h4>
+                <div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
+                        neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
+                    </p>
+                    <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceFour">Read More</a>
+                </div>
+            </div>
+            <div class="col-5">
+                <img class="img-fluid" src="~/images/woman-2722936_640-resized.jpg"/>
+            </div>
+        </div>
+    </div>
+</section>

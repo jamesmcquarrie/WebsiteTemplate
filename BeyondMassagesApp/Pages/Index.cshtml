@@ -1,0 +1,300 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@*Hero*@
+
+
+<section>
+    <div class="container-fluid no-padding">
+        <div class="hero-image">
+            <div class="subtext">
+                <h1>Hero Image</h1>
+                <p>Here is a sentence worth of subtext...</p>
+                <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-area="" asp-page="/Services">Browse our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@*<section class="d-flex align-items-center hero-section big bg-primary py-5">
+    <div class="row flex-grow-1">
+        <div class="col">
+            text
+        </div>
+        <div class="col">
+            text
+        </div>
+    </div>
+*@
+
+@*    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5 d-flex flex-column justify-content-center">
+               <h2 class="display-3 fw-normal hero-section-title">Catchy Phrase</h2>
+               <p>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
+                   et dolore magna aliqua.
+               </p>
+               <div>
+                    <a class="btn btn-success btn-lg" role="button" asp-area="" asp-page="/Services">Browse our Service</a>
+               </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center">
+                <img class="img-fluid" id="jumping-man-img" src="~/images/jumping man.jpg" alt="" />
+            </div>
+        </div>
+    </div>
+
+@*about*@
+
+@*<section id="about" class="bg-light-subtle py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="display-6 fw-normal">About</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img alt="happy man at lake" src="~/images/happy.jpg" />
+            </div>
+            <div class="col">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Posuere urna nec tincidunt praesent
+                    semper feugiat nibh sed. Aenean sed adipiscing diam donec adipiscing tristique risus.
+                    Gravida neque convallis a cras semper auctor. Tempor nec feugiat nisl pretium fusce id.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. In vitae turpis massa sed elementum tempus egestas.
+                    At auctor urna nunc id cursus metus aliquam eleifend mi. Sed risus ultricies tristique nulla
+                    aliquet enim tortor. Lorem ipsum dolor sit amet consectetur adipiscing elit duis.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+*@
+
+@* style="height: 40vh;"
+    style="background: linear-gradient(to right, var(--bs-secondary) 0%, var(--bs-secondary) 50%, var(--bs-light) 50%, var(--bs-light) 100%)"
+*@
+<section id="About">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-5">
+                <img class="img-fluid" alt="massage therapist" src="~/images/GettyImages-476805461.jpg" />
+            </div>
+            <div class="col-12 col-lg-6 py-5">
+                <div class="text-container-75">
+                    <div class="section-title text-center text-lg-center">
+                        <h2 class="display-6 fw-normal">About</h2>
+                    </div>
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Posuere urna nec tincidunt praesent
+                            semper feugiat nibh sed. Aenean sed adipiscing diam donec adipiscing tristique risus.
+                            Gravida neque convallis a cras semper auctor. Tempor nec feugiat nisl pretium fusce id.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. In vitae turpis massa sed elementum tempus egestas.
+                            At auctor urna nunc id cursus metus aliquam eleifend mi. Sed risus ultricies tristique nulla
+                            aliquet enim tortor. Lorem ipsum dolor sit amet consectetur adipiscing elit duis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Services*@
+
+<section class="bg-primary py-5">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center section-title mx-5">
+            <h2 class="display-6 fw-normal">Services</h2>
+        </div>
+        <div class="row d-flex justify-content-evenly mx-3 mx-md-4 g-5">
+            <div class="col-12 col-lg-6 col-xxl-3 px-0 px-md-4">
+                <div class="card">
+                    <img class="img-fluid card-img-top" src="~/images/pexels-andrea-piacquadio-3764568-resized.jpg"  />
+                    <div class="card-body">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-success rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xxl-3 px-0 px-md-4">
+                <div class="card">
+                    <img class="img-fluid card-img-top" src="~/images/pexels-antoni-shkraba-4599374-resized.jpg" />
+                    <div class="card-body">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-success rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xxl-3 px-0 px-md-4">
+                <div class="card">
+                    <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663378-resized.jpg"/>
+                    <div class="card-body">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-success rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xxl-3 px-0 px-md-4">
+                <div class="card">
+                    <img class="img-fluid card-img-top" src="~/images/woman-2722936_640-resized.jpg" />
+                    <div class="card-body">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-success rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Call to action*@
+
+@*<section class="bg-secondary py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <h2 class="display-6 fw-normal">Ready to take the next step?</h2>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <button class="btn btn-success btn-lg" type="button">Request an appointment</button>
+            </div>
+        </div>
+    </div>
+</section>
+*@
+
+
+
+<section class="bg-primary-subtle py-5">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center section-title">
+            <h2 class="display-6 fw-normal">Testimonials</h2>
+        </div>
+        <div class="row d-flex justify-content-evenly align-items-center mx-2 mx-lg-5 g-5">
+
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section id="Contact" class="bg-primary py-5">
+    <div class="container">
+        <form class="d-flex justify-content-center">
+            <div class="col-12 col-xl-8 bg-secondary p-5">
+                <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
+                <div class="row mb-3">
+                    <div class="vstack gap-1">
+                        <div class="">0123456789</div>
+@*                        <div class="vr d-flex align-self-center" style="height: 18px;"></div>
+*@                      <div class="text-break">info@BeyondMassagesApp.com</div>
+                        <div>500 Terry Francine Street, San Francisco, CA 94158</div>
+                    </div>
+                </div>
+@*                <div class="row mb-3">
+                    <div class="col">
+                        500 Terry Francine Street, San Francisco, CA 94158
+                    </div>
+                </div>
+*@                <div class="form-floating mb-3">
+                    <input type="text" class="form-control box-up-input shadow-none" id="floatingName" placeholder="Name" aria-label="Name">
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control box-up-input shadow-none" id="floatingEmail" placeholder="Email" aria-label="Email">
+                    <label for="floatingEmail">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control box-up-input shadow-none" id="floatingSubject" placeholder="Subject" aria-label="Subject">
+                    <label for="floatingSubject">Subject</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control bordered-textarea shadow-none" id="floatingInput" placeholder="Message" aria-label="Message" style="height : 150px"></textarea>
+                    <label for="floatingInput">Message</label>
+                </div>
+                <button type="submit" class="btn btn-info rounded-0 mb-3">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
