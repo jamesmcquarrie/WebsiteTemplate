@@ -1,15 +1,15 @@
 ﻿@page
-@model ServiceOneModel
+@model BeyondMassagesApp.Pages.Services.ServiceTwoModel
 @{
-    ViewData["Title"] = "ServiceOne";
+    ViewData["Title"] = "ServiceTwo";
 }
 
 <section>
     <div class="container-fluid">
-        <div class="row d-flex justify-content-between">
-            <div class="col-12 col-xxl-6 py-5 d-flex justify-content-center align-items-center">
-                <div class="text-container-50 text-container mx-auto">
-                    <h4 class="section-title text-center text-lg-center">What is Service One?</h4>
+        <div class="row align-items-center">
+            <div class="col-12 col-xxl-6 py-5">
+                <div class="text-container-sm-75 text-container-lg-50 text-container-xxl-75 text-container-xxxxl-50 mx-auto">
+                    <h4 class="section-title text-center text-lg-center">What is Service Two?</h4>
                     <div class="mb-5">
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -38,13 +38,13 @@
                         <div class="px-2">60 minutes - £95</div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-info rounded-0 m-auto" type="button">Book Treatment</button>
+                        <button class="btn btn-info rounded-0 m-auto" type="button">Book Service</button>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-xxl-6 d-flex justify-content-center align-items-center py-5 bg-secondary">
-                <img class="img-fluid" src="/images/pexels-cottonbro-studio-3998008-cropped.jpg">
+                <img class="img-fluid shrink-image-md-50" src="/images/pexels-cottonbro-studio-3998008.jpg">
             </div>
         </div>
     </div>
@@ -52,11 +52,11 @@
 
 <section class="bg-secondary-subtle py-5">
     <div class="container">
-        <div class="col d-flex justify-content-center mb-5">
+        <div class="col mb-5">
             <div class="fs-3 fw-medium text-center">Didn't find what you were looking for?</div>
         </div>
         <div class="col d-flex justify-content-center">
-            <a class="btn btn-info rounded-0 m-auto" role="button" asp-area="" asp-page="/Services">Browse our other services here</a>
+            <a class="btn btn-info rounded-0 m-auto" role="button" asp-page="/Services/Index">Browse our other services here</a>
         </div>
     </div>
 </section>

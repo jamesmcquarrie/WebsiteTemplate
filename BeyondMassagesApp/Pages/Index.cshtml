@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model BeyondMassagesApp.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
@@ -13,7 +13,7 @@
             <div class="subtext p-3 p-sm-0">
                 <h1>Hero Image</h1>
                 <p>Here is a sentence worth of subtext...</p>
-                <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-area="" asp-page="/Services">Browse our Services</a>
+                <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-page="/Services/Index">Browse our Services</a>
             </div>
         </div>
     </div>
@@ -22,15 +22,15 @@
 @*Services*@
 
 
-<section id="About">
+<section id="about">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-5">
-                <img class="img-fluid" alt="massage therapist" src="~/images/GettyImages-476805461.jpg" />
+                <img class="img-fluid" alt="massage therapist" src="~/images/pexels-mart-production-8217536.jpg" />
             </div>
 
             <div class="col-12 col-lg-6 py-5">
-                <div class="text-container-75">
+                <div class="text-container-sm-75 text-container-xxxxl-50">
                     <div class="section-title text-center text-lg-center">
                         <h2 class="display-6 fw-normal">About</h2>
                     </div>
@@ -66,7 +66,9 @@
         <div class="row d-flex justify-content-evenly mx-lg-4">
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-xxl-0">
-                    <img class="img-fluid card-img-top" src="~/images/pexels-andrea-piacquadio-3764568-cropped.jpg"  />
+                    <a asp-page="/Services/Service-One">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-andrea-piacquadio-3764568.jpg" />
+                    </a>
                     <div class="card-body">
                         <h4 class="card-title">Service One</h4>
                         <p>
@@ -74,52 +76,58 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-One">Learn More</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-xxl-0">
-                    <img class="img-fluid card-img-top" src="~/images/pexels-antoni-shkraba-4599374-cropped.jpg" />
+                    <a asp-page="/Services/Service-Two">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-antoni-shkraba-4599374.jpg" />
+                    </a>
                     <div class="card-body">
-                        <h4 class="card-title">Service One</h4>
+                        <h4 class="card-title">Service Two</h4>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Two">Learn More</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-sm-0">
-                    <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663378-cropped.jpg" />
+                    <a asp-page="/Services/Service-Three">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663378.jpg" />
+                    </a>
                     <div class="card-body">
-                        <h4 class="card-title">Service One</h4>
+                        <h4 class="card-title">Service Three</h4>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Three">Learn More</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card">
-                    <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663361-cropped.jpg" />
+                    <a asp-page="/Services/Service-Four">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663361.jpg" />
+                    </a>
                     <div class="card-body">
-                        <h4 class="card-title">Service One</h4>
+                        <h4 class="card-title">Service Four</h4>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-area="" asp-page="/ServiceOne">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Four">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -136,7 +144,7 @@
             <h2 class="display-6 fw-normal">Testimonials</h2>
         </div>
 
-        <div class="row d-flex justify-content-evenly align-items-center mx-sm-2 g-5">
+        <div class="row mx-sm-2 g-5">
             <div class="col-12 col-xl-4 d-flex justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
                     <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
@@ -185,14 +193,14 @@
 @* Contact Form *@
 
 
-<section id="Contact" class="bg-primary py-5">
+<section id="contact" class="bg-primary py-5">
     <div class="container">
         <form class="d-flex justify-content-center">
             <div class="col-12 col-lg-8 bg-secondary p-3 p-sm-5">
                 <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
                 <div class="row mb-3">
                     <div class="vstack gap-1">
-                        <div class="">123-456-7890</div>
+                        <div>123-456-7890</div>
                         <div class="text-break">info@BeyondMassagesApp.com</div>
                         <div>500 Terry Francine Street, San Francisco, CA 94158</div>
                     </div>

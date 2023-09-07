@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BeyondMassagesApp.Pages
+namespace BeyondMassagesApp.Pages.Services
 {
-    public class ContactUsModel : PageModel
+    public class ServiceThreeModel : PageModel
     {
         public void OnGet()
         {

@@ -10,43 +10,6 @@ $dark: #807563;
 @import "../lib/bootstrap/scss/bootstrap";
 @import "../lib/bootstrap/scss/_functions.scss";
 @import "../lib/bootstrap/scss/_variables.scss";
-
-$utilities: map-merge(
-  $utilities, (
-    "rounded": map-merge(
-      map-get($utilities, "rounded"),
-      ( responsive: true ),
-    ),
-  )
-);
-
-$utilities: map-merge(
-  $utilities, (
-    "rounded-top": map-merge(
-      map-get($utilities, "rounded-top"),
-      ( responsive: true ),
-    ),
-  )
-);
-
-$utilities: map-merge(
-  $utilities, (
-    "rounded-start": map-merge(
-      map-get($utilities, "rounded-start"),
-      ( responsive: true ),
-    ),
-  )
-);
-
-$utilities: map-merge(
-  $utilities, (
-    "rounded-end": map-merge(
-      map-get($utilities, "rounded-end"),
-      ( responsive: true ),
-    ),
-  )
-);
-
 @import "../lib/bootstrap/scss/_variables-dark.scss";
 @import "../lib/bootstrap/scss/_maps.scss";
 @import "../lib/bootstrap/scss/_mixins.scss";
@@ -54,18 +17,19 @@ $utilities: map-merge(
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap');
 @import "../lib/bootstrap/scss/utilities/_api.scss";
 
-/*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-*/
+$utilities: map-merge(
+  $utilities, (
+    "rounded": map-merge(map-get($utilities, "rounded"), (responsive: true)),
+    "rounded-top": map-merge(map-get($utilities, "rounded-top"), (responsive: true)),
+    "rounded-start": map-merge(map-get($utilities, "rounded-start"), (responsive: true)),
+    "rounded-end": map-merge(map-get($utilities, "rounded-end"), (responsive: true))
+  )
+);
 
-.navbar-toggler {
-    border: none;
+@mixin transition-properties {
+    transition: border-color 1s ease, border-bottom 0.5s ease, width 1s ease;
 }
 
-.nav-link:hover, .nav-link.dropdown:hover {
-    color: black;
-}
 
 html {
     font-size: 18px;
@@ -77,84 +41,30 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-@media (max-width: 575.98px) {
-    body {
-        font-size: 14px; /* 87.5% of the base size */
-    }
-}
-
-h1 {
+h1, h2, h3, h4 {
     font-family: 'Merriweather', serif;
 }
 
 h2 {
-    font-family: 'Merriweather', serif;
     font-size: 3rem;
 }
 
-h3 {
-    font-family: 'Merriweather', serif;
-}
-
 h4 {
-    font-family: 'Merriweather', serif;
     padding-bottom: 15px;
 }
 
-.svg-dimensions {
-    width: 42px /* your new width value for xs */;
-    height: 42px /* your new height value for xs */;
-}
-
-@media (max-width: 575.98px) { // Extra small breakpoint (Bootstrap 'xs')
-    .svg-dimensions-xs {
-        width: 32px/* your new width value for xs */;
-        height: 32px/* your new height value for xs */;
-    }
-}
-
-
-@media (min-width: 576px) {
-    .text-container {
-        max-width: 75%; /* Adjust this value to fit your design preferences */
-        margin: 0 auto; /* Center the container within the column */
-    }
-}
-
-@media (min-width: 992px) {
-    .text-container {
-        max-width: 50%; /* Adjust this value to fit your design preferences */
-        margin: 0 auto; /* Center the container within the column */
-    }
-}
-
-
-@media (min-width: 1400px) {
-    .text-container {
-        max-width: 75%; /* Adjust this value to fit your design preferences */
-        margin: 0 auto; /* Center the container within the column */
-    }
-}
-
-
-
-@media (min-width: 2000px) {
-    .text-container-50 {
-        max-width: 50%; /* Adjust this value to fit your design preferences */
-        margin: 0 auto; /* Center the container within the column */
-    }
-}
-
-@media (min-width: 576px) {
-    .text-container-75 {
-        max-width: 75%; /* Adjust this value to fit your design preferences */
-        margin: 0 auto; /* Center the container within the column */
-    }
+.navbar-toggler {
+    border: none;
 }
 
 .nav-item {
+    color: black;
     padding-right: 8px;
     padding-left: 8px;
+}
+
+.no-padding {
+    padding: 0;
 }
 
 .hero-image {
@@ -172,63 +82,105 @@ h4 {
     justify-content: center;
 }
 
-.no-padding {
-    padding-left: 0;
-    padding-right: 0;
+.hero-section {
+    padding: 80px 0;
+    height: 30vh;
+
+    .hero-section-title {
+        padding-bottom: 10px;
+    }
 }
 
 .subtext {
     font-size: 1.4rem;
     text-align: center;
-    color: white;
-}
-
-.hero-section {
-    padding-top: 80px;
-    padding-bottom: 80px;
-    height: 30vh;
-}
-
-.hero-section.big {
-    height: 50vh;
+    color: $light;
 }
 
 .section-title {
     padding-bottom: 40px;
 }
 
-.hero-section-title {
-    padding-bottom: 10px;
+.svg-dimensions {
+    width: 42px;
+    height: 42px;
 }
 
 .box-up-input {
     border: 2px solid transparent;
-    border-bottom: 1px solid #000; // Add a bottom border
+    border-bottom: 1px solid $dark;
     border-radius: 0;
-    width: 90%; // Set initial width
-    transition: border-color 1s ease, width 1s ease; // Smooth transition for the border effect and width
+    width: 90%;
+    @include transition-properties;
 
-    &:hover {
-        border-bottom: 2px solid #000; // Increase bottom border thickness on hover
-        transition: border-bottom 0.1s ease; // Smooth transition for the border effect and width
-    }
-
+    &:hover,
     &:focus {
-        border-color: black; // Increase bottom border thickness on focus
-        border-bottom: 2px solid #000; // Add a bottom border
-        width: 100%; // Increase width on focus
-        transition: border-color 1s ease, border-bottom 1s ease, width 1s ease; // Smooth transition for the border effect and width
+        border-bottom: 2px solid $dark;
+        border-color: $dark;
+        width: 100%;
     }
 }
 
 .bordered-textarea {
-    border: 1px solid #000;
+    border: 1px solid $dark;
     border-radius: 0;
-    transition: border 0.1s ease; // Smooth transition for the border effect and width
-    display: block; // Allow width manipulation
-    width: 100%; // Set initial width
+    transition: border 0.1s ease;
+    display: block;
+    width: 100%;
 
-    &:hover, &:focus {
-        border: 2px solid #000; // Increase bottom border thickness on hover
+    &:hover,
+    &:focus {
+        border: 2px solid $dark;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+}
+
+@media (prefers-color-scheme: light) {
+}
+
+@media (max-width: 575.98px) {
+    body {
+        font-size: 14px;
+    }
+
+    .svg-dimensions-xs {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (min-width: 576px) {
+    .text-container-sm-75 {
+        max-width: 75%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .shrink-image-md-50 {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .text-container-lg-50 {
+        max-width: 50%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1400px) {
+    .text-container-xxl-75 {
+        max-width: 75%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1900px) {
+    .text-container-xxxxl-50 {
+        max-width: 50%;
+        margin: 0 auto;
     }
 }

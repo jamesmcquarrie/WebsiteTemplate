@@ -1,5 +1,5 @@
 ﻿@page
-@model ServicesModel
+@model BeyondMassagesApp.Pages.Services.IndexModel
 @{
     ViewData["Title"] = "Services";
 }
@@ -23,7 +23,9 @@
         <div class="card border border-2 mb-4 mx-lg-4">
             <div class="row justify-content-evenly g-0">
                 <div class="col-12 col-md d-flex justify-content-center justify-content-lg-start">
-                    <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-start-md-1" src="~/images/pexels-andrea-piacquadio-3764568-cropped.jpg" />
+                    <a asp-page="/Services/Service-One">
+                        <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-start-md-1" src="~/images/pexels-andrea-piacquadio-3764568.jpg" />
+                    </a>
                 </div>
                 <div class="col-12 col-md d-flex align-items-center">
                     <div class="card-body">
@@ -33,7 +35,7 @@
                             incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
                             neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
                         </p>
-                        <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceTwo">Read More</a>
+                        <a class="btn btn-secondary" role="button" asp-page="/Services/Service-One">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -49,11 +51,13 @@
                             incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
                             neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
                         </p>
-                        <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceTwo">Read More</a>
+                        <a class="btn btn-secondary" role="button" asp-page="/Services/Service-Two">Learn More</a>
                     </div>
                 </div>
                 <div class="col-12 col-md order-1 order-md-2 d-flex justify-content-end">
-                    <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-end-md-1" src="~/images/pexels-antoni-shkraba-4599374-cropped.jpg">
+                    <a asp-page="/Services/Service-Two">
+                        <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-end-md-1" src="~/images/pexels-antoni-shkraba-4599374.jpg">
+                    </a>
                 </div>
             </div>
         </div>
@@ -61,7 +65,9 @@
         <div class="card border border-2 mb-4 mx-lg-4">
             <div class="row justify-content-evenly g-0">
                 <div class="col-12 col-md d-flex justify-content-center justify-content-lg-start">
-                    <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-start-md-1" src="~/images/pexels-arina-krasnikova-6663378-cropped.jpg" />
+                    <a asp-page="/Services/Service-Three">
+                        <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-start-md-1" src="~/images/pexels-arina-krasnikova-6663378.jpg" />
+                    </a>
                 </div>
                 <div class="col-12 col-md d-flex align-items-center">
                     <div class="card-body">
@@ -71,7 +77,7 @@
                             incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
                             neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
                         </p>
-                        <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceTwo">Read More</a>
+                        <a class="btn btn-secondary" role="button" asp-page="/Services/Service-Three">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -87,11 +93,13 @@
                             incididunt ut labore et dolore magna aliqua. Pulvinar elementum integer enim
                             neque volutpat ac tincidunt. Sed nisi lacus sed viverra tellus in.
                         </p>
-                        <a class="btn btn-secondary" role="button" asp-area="" asp-page="/ServiceTwo">Read More</a>
+                        <a class="btn btn-secondary" role="button" asp-page="/Services/Service-Four">Learn More</a>
                     </div>
                 </div>
                 <div class="col-12 col-md order-1 order-md-2 d-flex justify-content-end">
-                    <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-end-md-1" src="~/images/pexels-arina-krasnikova-6663361-cropped.jpg" />
+                    <a asp-page="/Services/Service-Four">
+                        <img class="img-fluid rounded-top-1 rounded-top-md-0 rounded-end-md-1" src="~/images/pexels-arina-krasnikova-6663361.jpg" />
+                    </a>
                 </div>
             </div>
         </div>
