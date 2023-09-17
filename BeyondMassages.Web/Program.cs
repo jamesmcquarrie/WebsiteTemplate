@@ -1,5 +1,6 @@
 using BeyondMassages.Web.Features.Contact.Configuration;
 using BeyondMassages.Web.Features.Contact.Services;
+using MailKit.Net.Smtp;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.ConfigureOptions<EmailOptionsSetup>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddTransient<ISmtpClient, SmtpClient>();
 
 var app = builder.Build();
 

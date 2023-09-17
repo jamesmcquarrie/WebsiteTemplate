@@ -14,5 +14,4 @@ public class EmailModel
     public string Subject { get; set; } = string.Empty;
     [Required(ErrorMessage = "Please provide a message to send")]
     public string Message { get; set; } = string.Empty;
-    public bool IsSent { get; set; }
 }

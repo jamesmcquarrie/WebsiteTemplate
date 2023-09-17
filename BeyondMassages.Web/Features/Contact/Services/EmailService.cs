@@ -13,27 +13,29 @@ public class EmailService : IEmailService
 {
     private readonly ILogger<EmailService> _logger;
     private readonly IOptions<EmailOptions> _emailOptions;
-    public EmailService(ILogger<EmailService> logger, IOptions<EmailOptions> emailOptions)
+    private readonly ISmtpClient _smtpClient;
+
+    public EmailService(ILogger<EmailService> logger, IOptions<EmailOptions> emailOptions, ISmtpClient smtpClient)
     {
         _logger = logger;
         _emailOptions = emailOptions;
+        _smtpClient = smtpClient;
     }
 
     public async Task SendEmailAsync(EmailModel emailModel)
     {
         var email = ConstructEmail(emailModel);
-        using var smtpClient = new SmtpClient();
 
         try
         {
-            await smtpClient.ConnectAsync(_emailOptions.Value.Host,
+            await _smtpClient.ConnectAsync(_emailOptions.Value.Host,
                 _emailOptions.Value.Port,
                 SecureSocketOptions.StartTls);
 
-            await smtpClient.AuthenticateAsync(_emailOptions.Value.UserName,
+            await _smtpClient.AuthenticateAsync(_emailOptions.Value.UserName,
                 _emailOptions.Value.Password);
 
-            await smtpClient.SendAsync(email);
+            await _smtpClient.SendAsync(email);
 
             _logger.LogInformation("Email sent successfully");
 
@@ -42,7 +44,7 @@ public class EmailService : IEmailService
         catch (SmtpCommandException ex)
         {
             _logger.LogError(ex, "SMTP command error while sending email: {Message}, StatusCode: {StatusCode}", ex.Message, ex.StatusCode);
-            throw new UserFriendlyException("There was an error sending the email. Please try again later");
+            throw new UserFriendlyException("There was an error sending the email. Please try again later", ex);
         }
 
         catch (Exception ex)
@@ -50,12 +52,12 @@ public class EmailService : IEmailService
             // A general exception occurred (could be network issues or others).
             // Log or handle the exception message and maybe the InnerException here.
             _logger.LogError(ex,"Error occurred while sending email: {Message}", ex.Message);
-            throw new UserFriendlyException("There was an unexpected error while sending the email. Please try again later");
+            throw new UserFriendlyException("There was an unexpected error while sending the email. Please try again later", ex);
         }
 
         finally
         {
-            await smtpClient.DisconnectAsync(true);
+            await _smtpClient.DisconnectAsync(true);
         }
     }
 

@@ -23,15 +23,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        //if (TempData["ShowAlert"] != null)
-        //{
-        //    ShowAlert = (bool)TempData["ShowAlert"]!;
-        //}
 
-        //if (TempData["EmailIsSent"] != null)
-        //{
-        //    IsSent = (bool)TempData["EmailIsSent"]!;
-        //}
     }
 
     public async Task<IActionResult> OnPostAsync()
