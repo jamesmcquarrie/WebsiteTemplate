@@ -1,0 +1,261 @@
+﻿@page
+@model BeyondMassagesApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@*Hero*@
+
+
+<section>
+    <div class="container-fluid no-padding">
+        <div class="hero-image">
+            <div class="subtext p-3 p-sm-0">
+                <h1>Hero Image</h1>
+                <p>Here is a sentence worth of subtext...</p>
+                <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-page="/Services/Index">Browse our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Services*@
+
+
+<section id="about">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-5">
+                <img class="img-fluid" alt="massage therapist" src="~/images/pexels-mart-production-8217536.jpg" />
+            </div>
+
+            <div class="col-12 col-lg-6 py-5">
+                <div class="text-container-sm-75 text-container-xxxxl-50">
+                    <div class="section-title text-center text-lg-center">
+                        <h2 class="display-6 fw-normal">About</h2>
+                    </div>
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Posuere urna nec tincidunt praesent
+                            semper feugiat nibh sed. Aenean sed adipiscing diam donec adipiscing tristique risus.
+                            Gravida neque convallis a cras semper auctor. Tempor nec feugiat nisl pretium fusce id.
+                        </p>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. In vitae turpis massa sed elementum tempus egestas.
+                            At auctor urna nunc id cursus metus aliquam eleifend mi. Sed risus ultricies tristique nulla
+                            aliquet enim tortor. Lorem ipsum dolor sit amet consectetur adipiscing elit duis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Services*@
+
+
+<section class="bg-primary py-5">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center section-title">
+            <h2 class="display-6 fw-normal">Services</h2>
+        </div>
+
+        <div class="row d-flex justify-content-evenly mx-lg-4">
+            <div class="col-12 col-sm-6 col-xxl-3">
+                <div class="card mb-4 mb-xxl-0">
+                    <a asp-page="/Services/Service-One">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-andrea-piacquadio-3764568.jpg" />
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-One">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+                <div class="card mb-4 mb-xxl-0">
+                    <a asp-page="/Services/Service-Two">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-antoni-shkraba-4599374.jpg" />
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">Service Two</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Two">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+                <div class="card mb-4 mb-sm-0">
+                    <a asp-page="/Services/Service-Three">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663378.jpg" />
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">Service Three</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Three">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3">
+                <div class="card">
+                    <a asp-page="/Services/Service-Four">
+                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663361.jpg" />
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">Service Four</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Tempor nec feugiat nisl pretium fusce id velit.
+                        </p>
+                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Four">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Testimonials*@
+
+
+<section class="bg-primary-subtle py-5">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center section-title">
+            <h2 class="display-6 fw-normal">Testimonials</h2>
+        </div>
+
+        <div class="row mx-sm-2 g-5">
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xl-4 d-flex justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                </svg>
+                <figure>
+                    <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Contact Form *@
+
+
+<section id="contact" class="bg-primary py-5">
+    <div class="container">
+        <form asp-fragment="contact" class="d-flex justify-content-center" method="post" autocomplete="off">
+            <div class="col-12 col-lg-8 bg-secondary p-3 p-sm-5">
+                <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
+                <div class="row mb-3">
+                    <div class="vstack gap-1">
+                        <div>123-456-7890</div>
+                        <div class="text-break">info@BeyondMassagesApp.com</div>
+                        <div>500 Terry Francine Street, San Francisco, CA 94158</div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.Name" type="text" class="form-control box-up-input shadow-none" placeholder="Name" aria-label="Name">
+                    <label asp-for="EmailDetails.Name"></label>
+                    <span asp-validation-for="EmailDetails.Name" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.EmailAddress" type="email" class="form-control box-up-input shadow-none" placeholder="Email" aria-label="Email">
+                    <label asp-for="EmailDetails.EmailAddress"></label>
+                    <span asp-validation-for="EmailDetails.EmailAddress" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.Subject" type="text" class="form-control box-up-input shadow-none" placeholder="Subject" aria-label="Subject">
+                    <label asp-for="EmailDetails.Subject"></label>
+                    <span asp-validation-for="EmailDetails.Subject" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea asp-for="EmailDetails.Message" class="form-control bordered-textarea shadow-none" placeholder="Message" aria-label="Message" style="height : 150px; white-space: pre-line;"></textarea>
+                    <label asp-for="EmailDetails.Message"></label>
+                    <span asp-validation-for="EmailDetails.Message" class="text-danger" />
+                </div>
+
+                <button type="submit" class="btn btn-info rounded-0 mb-3">Submit</button>
+
+                @if (Model.ShowAlert)
+                {
+                    @if (Model.EmailDetails.IsSent)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show">
+                            @TempData["AlertMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            @TempData["AlertMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+                }
+
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
