@@ -234,7 +234,7 @@
 
                 @if (Model.ShowAlert)
                 {
-                    @if (Model.EmailDetails.IsSent)
+                    @if (Model.IsSent)
                     {
                         <div class="alert alert-success alert-dismissible fade show">
                             @TempData["AlertMessage"]

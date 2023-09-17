@@ -1,4 +1,5 @@
-﻿using BeyondMassages.Web.Features.Contact.Models;
+﻿using BeyondMassages.Web.Features.Contact.Exceptions;
+using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,30 +10,33 @@ public class IndexModel : PageModel
 {
     [BindProperty]
     public EmailModel EmailDetails { get; set; } = new EmailModel();
-    public bool ShowAlert = false;
+    public bool ShowAlert => TempData.ContainsKey("ShowAlert") && (bool)TempData["ShowAlert"]!;
+    public bool IsSent => TempData.ContainsKey("EmailIsSent") && (bool)TempData["EmailIsSent"]!;
     private readonly IEmailService _emailService;
+    private readonly ILogger<IndexModel> _logger;
 
-    public IndexModel(IEmailService emailService)
+    public IndexModel(IEmailService emailService, ILogger<IndexModel> logger)
     {
         _emailService = emailService;
+        _logger = logger;
     }
 
     public void OnGet()
     {
-        if (TempData["ShowAlert"] != null)
-        {
-            ShowAlert = (bool)TempData["ShowAlert"]!;
-        }
+        //if (TempData["ShowAlert"] != null)
+        //{
+        //    ShowAlert = (bool)TempData["ShowAlert"]!;
+        //}
 
-        if (TempData["EmailIsSent"] != null)
-        {
-            EmailDetails.IsSent = (bool)TempData["EmailIsSent"]!;
-        }
+        //if (TempData["EmailIsSent"] != null)
+        //{
+        //    IsSent = (bool)TempData["EmailIsSent"]!;
+        //}
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Page();
         }
@@ -43,16 +47,24 @@ public class IndexModel : PageModel
         {
             EmailDetails.Message = EmailDetails.Message.Replace("\n", "<br>");
             await _emailService.SendEmailAsync(EmailDetails);
+
             TempData["AlertMessage"] = "Email has been sent!";
-        }
-        catch (Exception)
-        {
-            TempData["AlertMessage"] = "Email failed to send";
+            TempData["EmailIsSent"] = true;
+
+            _logger.LogInformation("Email has been sent successfully.");
         }
 
-        TempData["EmailIsSent"] = EmailDetails.IsSent;
+        catch (UserFriendlyException ex)
+        {
+            TempData["AlertMessage"] = ex.Message;
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unexpected error occurred.");
+            TempData["AlertMessage"] = "An unexpected error occurred. Please try again later.";
+        }
 
         return RedirectToPage();
-
     }
 }

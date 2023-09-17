@@ -1,5 +1,6 @@
 ﻿using BeyondMassages.Web.Features.Contact.Configuration;
 using BeyondMassages.Web.Features.Contact.Models;
+using BeyondMassages.Web.Features.Contact.Exceptions;
 using Microsoft.Extensions.Options;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -34,14 +35,14 @@ public class EmailService : IEmailService
 
             await smtpClient.SendAsync(email);
 
-            emailModel.IsSent = true;
             _logger.LogInformation("Email sent successfully");
+
         }
 
         catch (SmtpCommandException ex)
         {
             _logger.LogError(ex, "SMTP command error while sending email: {Message}, StatusCode: {StatusCode}", ex.Message, ex.StatusCode);
-            throw;
+            throw new UserFriendlyException("There was an error sending the email. Please try again later");
         }
 
         catch (Exception ex)
@@ -49,7 +50,7 @@ public class EmailService : IEmailService
             // A general exception occurred (could be network issues or others).
             // Log or handle the exception message and maybe the InnerException here.
             _logger.LogError(ex,"Error occurred while sending email: {Message}", ex.Message);
-            throw;
+            throw new UserFriendlyException("There was an unexpected error while sending the email. Please try again later");
         }
 
         finally
