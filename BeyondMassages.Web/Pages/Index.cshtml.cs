@@ -3,6 +3,7 @@ using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net;
 
 namespace BeyondMassagesApp.Pages;
 
@@ -37,13 +38,13 @@ public class IndexModel : PageModel
 
         try
         {
-            EmailDetails.Message = EmailDetails.Message.Replace("\n", "<br>");
+            EmailDetails.Message = PrepareMessage(EmailDetails.Message);
             await _emailService.SendEmailAsync(EmailDetails);
 
             TempData["AlertMessage"] = "Email has been sent!";
             TempData["EmailIsSent"] = true;
 
-            _logger.LogInformation("Email has been sent successfully.");
+            //_logger.LogInformation("Email has been sent successfully.");
         }
 
         catch (UserFriendlyException ex)
@@ -58,5 +59,12 @@ public class IndexModel : PageModel
         }
 
         return RedirectToPage();
+    }
+
+    private string PrepareMessage(string message)
+    {
+        string sanitizedMessage = WebUtility.HtmlEncode(message);
+
+        return sanitizedMessage.Replace("\n", "<br>");
     }
 }

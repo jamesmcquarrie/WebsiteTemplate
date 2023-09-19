@@ -6,6 +6,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;
+using Polly;
 
 namespace BeyondMassages.Web.Features.Contact.Services;
 
@@ -14,12 +15,17 @@ public class EmailService : IEmailService
     private readonly ILogger<EmailService> _logger;
     private readonly IOptions<EmailOptions> _emailOptions;
     private readonly ISmtpClient _smtpClient;
+    private readonly IAsyncPolicy _policy; 
 
-    public EmailService(ILogger<EmailService> logger, IOptions<EmailOptions> emailOptions, ISmtpClient smtpClient)
+    public EmailService(ILogger<EmailService> logger, 
+        IOptions<EmailOptions> emailOptions, 
+        ISmtpClient smtpClient,
+        IAsyncPolicy policy)
     {
         _logger = logger;
         _emailOptions = emailOptions;
         _smtpClient = smtpClient;
+        _policy = policy;
     }
 
     public async Task SendEmailAsync(EmailModel emailModel)
@@ -28,17 +34,20 @@ public class EmailService : IEmailService
 
         try
         {
-            await _smtpClient.ConnectAsync(_emailOptions.Value.Host,
-                _emailOptions.Value.Port,
-                SecureSocketOptions.StartTls);
+            await _policy.ExecuteAsync(async () =>
+            {
+                await _smtpClient.ConnectAsync(_emailOptions.Value.Host,
+                    _emailOptions.Value.Port,
+                    SecureSocketOptions.StartTls);
 
-            await _smtpClient.AuthenticateAsync(_emailOptions.Value.UserName,
-                _emailOptions.Value.Password);
+                await _smtpClient.AuthenticateAsync(_emailOptions.Value.UserName,
+                    _emailOptions.Value.Password);
 
-            await _smtpClient.SendAsync(email);
+                await _smtpClient.SendAsync(email);
 
-            _logger.LogInformation("Email sent successfully");
 
+                _logger.LogInformation("Email sent successfully");
+            });
         }
 
         catch (SmtpCommandException ex)
