@@ -1,7 +1,7 @@
 ﻿@page
 @model BeyondMassagesApp.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
 @*Hero*@
@@ -223,9 +223,9 @@
                     <label asp-for="EmailDetails.Subject"></label>
                     <span asp-validation-for="EmailDetails.Subject" class="text-danger" />
                 </div>
-
+                 
                 <div class="form-floating mb-3">
-                    <textarea asp-for="EmailDetails.Message" class="form-control bordered-textarea shadow-none" placeholder="Message" aria-label="Message" style="height : 150px; white-space: pre-line;"></textarea>
+                    <textarea asp-for="EmailDetails.Message" class="form-control bordered-textarea shadow-none textarea-large textarea-pre-line" placeholder="Message" aria-label="Message"></textarea>
                     <label asp-for="EmailDetails.Message"></label>
                     <span asp-validation-for="EmailDetails.Message" class="text-danger" />
                 </div>
@@ -234,6 +234,15 @@
 
                 @if (Model.ShowAlert)
                 {
+                    @if (Model.IsCancelled)
+                    {
+                        <div class="alert alert-info alert-dismissible fade show">
+                            @TempData["AlertMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+
+                    }
+
                     @if (Model.IsSent)
                     {
                         <div class="alert alert-success alert-dismissible fade show">

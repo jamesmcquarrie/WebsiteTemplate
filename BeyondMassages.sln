@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeyondMassages.Web", "BeyondMassages.Web\BeyondMassages.Web.csproj", "{84B691B3-E733-41C5-8591-C127B2A64361}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{5E7C7FFD-9C9A-4223-B9F6-9C3939C7D173}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{84B691B3-E733-41C5-8591-C127B2A64361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84B691B3-E733-41C5-8591-C127B2A64361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84B691B3-E733-41C5-8591-C127B2A64361}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E7C7FFD-9C9A-4223-B9F6-9C3939C7D173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E7C7FFD-9C9A-4223-B9F6-9C3939C7D173}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E7C7FFD-9C9A-4223-B9F6-9C3939C7D173}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E7C7FFD-9C9A-4223-B9F6-9C3939C7D173}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

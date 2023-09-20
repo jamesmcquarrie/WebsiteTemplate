@@ -11,10 +11,11 @@ public class IndexModel : PageModel
 {
     [BindProperty]
     public EmailModel EmailDetails { get; set; } = new EmailModel();
-    public bool ShowAlert => TempData.ContainsKey("ShowAlert") && (bool)TempData["ShowAlert"]!;
-    public bool IsSent => TempData.ContainsKey("EmailIsSent") && (bool)TempData["EmailIsSent"]!;
     private readonly IEmailService _emailService;
     private readonly ILogger<IndexModel> _logger;
+    public bool ShowAlert => TempData.ContainsKey("ShowAlert") && (bool)TempData["ShowAlert"]!;
+    public bool IsSent => TempData.ContainsKey("EmailIsSent") && (bool)TempData["EmailIsSent"]!;
+    public bool IsCancelled => TempData.ContainsKey("EmailIsCancelled") && (bool)TempData["EmailIsCancelled"]!;
 
     public IndexModel(IEmailService emailService, ILogger<IndexModel> logger)
     {
@@ -39,15 +40,19 @@ public class IndexModel : PageModel
         try
         {
             EmailDetails.Message = PrepareMessage(EmailDetails.Message);
-            await _emailService.SendEmailAsync(EmailDetails);
+            await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
-            TempData["AlertMessage"] = "Email has been sent!";
             TempData["EmailIsSent"] = true;
-
-            //_logger.LogInformation("Email has been sent successfully.");
+            TempData["AlertMessage"] = "Email has been sent successfully!";
         }
 
-        catch (UserFriendlyException ex)
+        catch (OperationCanceledException)
+        {
+            TempData["EmailIsCancelled"] = true;
+            TempData["AlertMessage"] = "Email sending operation cancelled";
+        }
+
+        catch (Exception ex) when (ex is ArgumentException || ex is UserFriendlyException)
         {
             TempData["AlertMessage"] = ex.Message;
         }
@@ -65,6 +70,6 @@ public class IndexModel : PageModel
     {
         string sanitizedMessage = WebUtility.HtmlEncode(message);
 
-        return sanitizedMessage.Replace("\n", "<br>");
+        return sanitizedMessage.Replace(Environment.NewLine, "<br>");
     }
 }

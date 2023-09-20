@@ -1,4 +1,4 @@
-﻿@page "{statusCode?}"
+﻿@page
 @model BeyondMassages.Web.Pages.ErrorModel
 @{
     ViewData["Title"] = "Error";
@@ -6,11 +6,8 @@
 
 <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">
-        <h1 class="display-1 fw-bold">@Model.ResponseStatusCode</h1>
-        <p class="fs-3"> <span class="text-danger">Oops!</span> We could not complete your request.</p>
-        <p class="lead">
-            @Model.StatusMessage
-        </p>
+        <h1 class="display-1 fw-bold">Error</h1>
+        <p class="fs-3">@Model.ExceptionMessage</p>
         <a asp-page="Index" class="btn btn-info">Go Home</a>
     </div>
 </div>

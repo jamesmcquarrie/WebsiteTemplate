@@ -15,7 +15,6 @@ $dark: #807563;
 @import "../lib/bootstrap/scss/_mixins.scss";
 @import "../lib/bootstrap/scss/_utilities.scss";
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap');
-@import "../lib/bootstrap/scss/utilities/_api.scss";
 
 $utilities: map-merge(
   $utilities, (
@@ -25,6 +24,8 @@ $utilities: map-merge(
     "rounded-end": map-merge(map-get($utilities, "rounded-end"), (responsive: true))
   )
 );
+
+@import "../lib/bootstrap/scss/utilities/_api.scss";
 
 @mixin transition-properties {
     transition: border-color 1s ease, border-bottom 0.5s ease, width 1s ease;
@@ -106,6 +107,10 @@ h4 {
     height: 42px;
 }
 
+.svg-margin {
+    margin: 10px;
+}
+
 .box-up-input {
     border: 2px solid transparent;
     border-bottom: 1px solid $dark;
@@ -132,6 +137,16 @@ h4 {
     &:focus {
         border: 2px solid $dark;
     }
+}
+
+.form-floating > .form-control.textarea-large,
+.form-floating > .form-select.textarea-large {
+    height: 150px;
+    min-height: 150px;
+}
+
+.textarea-pre-line {
+    white-space: pre-line;
 }
 
 @media (prefers-color-scheme: dark) {

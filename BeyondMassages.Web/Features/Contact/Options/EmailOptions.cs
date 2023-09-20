@@ -1,10 +1,17 @@
-﻿namespace BeyondMassages.Web.Features.Contact.Configuration
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeyondMassages.Web.Features.Contact.Options;
+
+public class EmailOptions
 {
-    public class EmailOptions
-    {
-        public string UserName { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string Host { get; set; } = string.Empty;
-        public int Port { get; set; }
-    }
+    [Required]
+    public string UserName { get; set; } = string.Empty;
+    [Required]
+    public string Password { get; set; } = string.Empty;
+    [Required]
+    public string Host { get; set; } = string.Empty;
+    [Required]
+    public int Port { get; set; }
+    [Required]
+    public string SecureSocketOptions { get; set; } = string.Empty;
 }
