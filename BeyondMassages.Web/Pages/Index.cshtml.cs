@@ -39,7 +39,7 @@ public class IndexModel : PageModel
 
         try
         {
-            EmailDetails.Message = PrepareMessage(EmailDetails.Message);
+            PrepareMessage();
             await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
             TempData["EmailIsSent"] = true;
@@ -66,10 +66,12 @@ public class IndexModel : PageModel
         return RedirectToPage();
     }
 
-    private string PrepareMessage(string message)
+    private void PrepareMessage()
     {
-        string sanitizedMessage = WebUtility.HtmlEncode(message);
-
-        return sanitizedMessage.Replace(Environment.NewLine, "<br>");
+        EmailDetails.Name = WebUtility.HtmlEncode(EmailDetails.Name);
+        EmailDetails.EmailAddress = WebUtility.HtmlEncode(EmailDetails.EmailAddress);
+        EmailDetails.Subject = WebUtility.HtmlEncode(EmailDetails.Subject);
+        EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message)
+            .Replace(Environment.NewLine, "<br>");
     }
 }
