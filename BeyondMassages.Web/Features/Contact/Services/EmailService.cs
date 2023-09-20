@@ -87,7 +87,7 @@ public class EmailService : IEmailService
 
         email.From.Add(MailboxAddress.Parse(emailModel.EmailAddress));
         email.To.Add(MailboxAddress.Parse(_emailOptions.Value.UserName));
-        email.Subject = emailModel.Subject;
+        email.Subject = $"{emailModel.Name} - {emailModel.Subject}";
         email.Body = new TextPart(TextFormat.Html) { Text = emailModel.Message };
 
         return email;
