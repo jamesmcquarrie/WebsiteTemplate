@@ -31,7 +31,17 @@ public class EmailService : IEmailService
 
     public async Task SendEmailAsync(EmailModel emailModel, CancellationToken cancellationToken = default)
     {
-        var email = ConstructEmail(emailModel);
+        MimeMessage email = new MimeMessage();
+
+        try
+        {
+            email = ConstructEmail(emailModel);
+        }
+
+        catch (ArgumentException)
+        {
+            throw;
+        }
 
         try
         {
@@ -95,20 +105,29 @@ public class EmailService : IEmailService
 
     private void CheckEmailValid(EmailModel emailModel) 
     {
-        if (string.IsNullOrEmpty(emailModel.EmailAddress) || 
-            !new EmailAddressAttribute().IsValid(emailModel.EmailAddress))
+        if (string.IsNullOrEmpty(emailModel.Name))
         {
-            throw new ArgumentException("Invalid email");
+            throw new ArgumentException("Invalid name - no name has been provided", "Name");
+        }
+
+        if (string.IsNullOrEmpty(emailModel.EmailAddress))
+        {
+            throw new ArgumentException("Invalid email - no email address has been provided", "Name");
+        }
+
+        if (!new EmailAddressAttribute().IsValid(emailModel.EmailAddress))
+        {
+            throw new ArgumentException("Invalid email - the email provided does not fit the pattern of a real email address", "EmailAddress");
         }
 
         if (string.IsNullOrEmpty(emailModel.Subject))
         {
-            throw new ArgumentException("Invalid subject");
+            throw new ArgumentException("Invalid subject - no subject has been provided", "Subject");
         }
 
         if (string.IsNullOrEmpty(emailModel.Message))
         {
-            throw new ArgumentException("Invalid message body");
+            throw new ArgumentException("Invalid message body - no message has been provided", "Message");
         }
     }
 }
