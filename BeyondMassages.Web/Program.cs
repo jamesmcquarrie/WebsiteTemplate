@@ -49,7 +49,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ISmtpClient, SmtpClient>();
 
 var policy = Policy
-    .Handle<SmtpCommandException>(ex => (int)ex.ErrorCode >= 400 && (int)ex.ErrorCode <= 500)
+    .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
     .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
 
 builder.Services.AddSingleton<IAsyncPolicy>(policy);
@@ -60,6 +60,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
 else
 {
     app.UseExceptionHandler("/Error");
