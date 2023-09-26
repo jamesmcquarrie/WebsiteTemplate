@@ -4,5 +4,5 @@ namespace BeyondMassages.Web.Features.Contact.Services;
 
 public interface IEmailService
 {
-    Task SendEmailAsync(EmailModel emailModel, CancellationToken cancellationToken = default);
+    Task<EmailResult> SendEmailAsync(EmailModel emailModel, CancellationToken cancellationToken = default);
 }

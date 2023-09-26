@@ -234,26 +234,27 @@
 
                 @if (Model.ShowAlert)
                 {
-                    @if (Model.IsCancelled)
+                    @if (Model.EmailResult.IsCancelled)
                     {
                         <div class="alert alert-info alert-dismissible fade show">
-                            @TempData["AlertMessage"]
+                            @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
 
                     }
 
-                    @if (Model.IsSent)
+                    @if (Model.EmailResult.IsSent)
                     {
                         <div class="alert alert-success alert-dismissible fade show">
-                            @TempData["AlertMessage"]
+                            @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     }
+
                     else
                     {
                         <div class="alert alert-danger alert-dismissible fade show">
-                            @TempData["AlertMessage"]
+                            @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     }
