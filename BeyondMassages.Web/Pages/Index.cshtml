@@ -230,7 +230,7 @@
                     <span asp-validation-for="EmailDetails.Message" class="text-danger" />
                 </div>
 
-                <button type="submit" class="btn btn-info rounded-0 mb-3">Submit</button>
+                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-3">Submit</button>
 
                 @if (Model.ShowAlert)
                 {
@@ -269,3 +269,5 @@
 {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<script src="~/js/submitForm.js"></script>
