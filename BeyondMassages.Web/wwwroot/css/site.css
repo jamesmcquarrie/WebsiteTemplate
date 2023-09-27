@@ -17387,10 +17387,6 @@ h4, .h4 {
   padding-left: 8px;
 }
 
-.no-padding {
-  padding: 0;
-}
-
 .hero-image {
   display: flex;
   width: 100%;
@@ -17407,21 +17403,7 @@ h4, .h4 {
 }
 
 .hero-section {
-  padding: 80px 0;
   height: 30vh;
-}
-.hero-section .hero-section-title {
-  padding-bottom: 10px;
-}
-
-.subtext {
-  font-size: 1.4rem;
-  text-align: center;
-  color: #ffffff;
-}
-
-.section-title {
-  padding-bottom: 40px;
 }
 
 .svg-dimensions {

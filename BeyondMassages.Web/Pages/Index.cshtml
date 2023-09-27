@@ -8,31 +8,31 @@
 
 
 <section>
-    <div class="container-fluid no-padding">
+    <div class="container-fluid p-0">
         <div class="hero-image">
-            <div class="subtext p-3 p-sm-0">
-                <h1>Hero Image</h1>
-                <p>Here is a sentence worth of subtext...</p>
+            <div class="text-light text-center">
+                <h1 class="display-5">Hero Image</h1>
+                <p class="fs-4">Here is a sentence worth of subtext...</p>
                 <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-page="/Services/Index">Browse our Services</a>
             </div>
         </div>
     </div>
 </section>
 
-@*Services*@
+@*About*@
 
 
 <section id="about">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-5">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-4 py-sm-5">
                 <img class="img-fluid" alt="massage therapist" src="~/images/pexels-mart-production-8217536.jpg" />
             </div>
 
-            <div class="col-12 col-lg-6 py-5">
+            <div class="col-12 col-lg-6 py-4 py-sm-5">
                 <div class="text-container-sm-75 text-container-xxxxl-50">
-                    <div class="section-title text-center text-lg-center">
-                        <h2 class="display-6 fw-normal">About</h2>
+                    <div class="text-center text-lg-center pb-4 pb-sm-5">
+                        <h2 class="display-6 mb-0 fw-normal">About</h2>
                     </div>
                     <div>
                         <p>
@@ -57,10 +57,10 @@
 @*Services*@
 
 
-<section class="bg-primary py-5">
+<section class="bg-primary py-4 py-sm-5">
     <div class="container-fluid">
-        <div class="d-flex justify-content-center section-title">
-            <h2 class="display-6 fw-normal">Services</h2>
+        <div class="d-flex justify-content-center pb-4 pb-sm-5">
+            <h2 class="display-6 mb-0 fw-normal">Services</h2>
         </div>
 
         <div class="row d-flex justify-content-evenly mx-lg-4">
@@ -138,13 +138,13 @@
 @*Testimonials*@
 
 
-<section class="bg-primary-subtle py-5">
+<section class="bg-primary-subtle py-4 py-sm-5">
     <div class="container-fluid">
-        <div class="d-flex justify-content-center section-title">
-            <h2 class="display-6 fw-normal">Testimonials</h2>
+        <div class="d-flex justify-content-center pb-4 pb-sm-5">
+            <h2 class="display-6 mb-0 fw-normal">Testimonials</h2>
         </div>
 
-        <div class="row mx-sm-2 g-5">
+        <div class="row mx-sm-2">
             <div class="col-12 col-xl-4 d-flex justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
                     <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
@@ -177,11 +177,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
                     <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
                 </svg>
-                <figure>
+                <figure class="mb-0">
                     <blockquote class="blockquote">
                         <p>A well-known quote, contained in a blockquote element.</p>
                     </blockquote>
-                    <figcaption class="blockquote-footer">
+                    <figcaption class="blockquote-footer mb-0">
                         Someone famous in <cite title="Source Title">Source Title</cite>
                     </figcaption>
                 </figure>
@@ -193,16 +193,16 @@
 @* Contact Form *@
 
 
-<section id="contact" class="bg-primary py-5">
+<section id="contact" class="bg-primary py-4 py-sm-5">
     <div class="container">
         <form asp-fragment="contact" class="d-flex justify-content-center" method="post" autocomplete="off">
             <div class="col-12 col-lg-8 bg-secondary p-3 p-sm-5">
                 <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
                 <div class="row mb-3">
                     <div class="vstack gap-1">
-                        <div>123-456-7890</div>
-                        <div class="text-break">info@BeyondMassagesApp.com</div>
-                        <div>500 Terry Francine Street, San Francisco, CA 94158</div>
+                        <div><i class="bi bi-telephone-fill"></i> 123-456-7890</div>
+                        <div class="text-break"><i class="bi bi-envelope-fill"></i> info@BeyondMassagesApp.com</div>
+                        <div><i class="bi bi-geo-alt-fill"></i> Road name, Town, Post Code, Country</div>
                     </div>
                 </div>
 
@@ -230,13 +230,13 @@
                     <span asp-validation-for="EmailDetails.Message" class="text-danger" />
                 </div>
 
-                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-3">Submit</button>
+                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-0">Submit</button>
 
                 @if (Model.ShowAlert)
                 {
                     @if (Model.EmailResult.IsCancelled)
                     {
-                        <div class="alert alert-info alert-dismissible fade show">
+                        <div class="alert alert-info alert-dismissible fade show mt-3 mb-0">
                             @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
@@ -245,7 +245,7 @@
 
                     @if (Model.EmailResult.IsSent)
                     {
-                        <div class="alert alert-success alert-dismissible fade show">
+                        <div class="alert alert-success alert-dismissible fade show mt-3 mb-0">
                             @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
@@ -253,7 +253,7 @@
 
                     else
                     {
-                        <div class="alert alert-danger alert-dismissible fade show">
+                        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">
                             @Model.EmailResult.Message
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
