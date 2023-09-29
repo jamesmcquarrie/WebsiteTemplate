@@ -195,7 +195,7 @@
 
 <section id="contact" class="bg-primary py-4 py-sm-5">
     <div class="container">
-        <form asp-fragment="contact" class="d-flex justify-content-center" method="post" autocomplete="off">
+        <form class="d-flex justify-content-center" method="post" autocomplete="off">
             <div class="col-12 col-lg-8 bg-secondary p-3 p-sm-5">
                 <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
                 <div class="row mb-3">
@@ -231,35 +231,6 @@
                 </div>
 
                 <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-0">Submit</button>
-
-                @if (Model.ShowAlert)
-                {
-                    @if (Model.EmailResult.IsCancelled)
-                    {
-                        <div class="alert alert-info alert-dismissible fade show mt-3 mb-0">
-                            @Model.EmailResult.Message
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-
-                    }
-
-                    @if (Model.EmailResult.IsSent)
-                    {
-                        <div class="alert alert-success alert-dismissible fade show mt-3 mb-0">
-                            @Model.EmailResult.Message
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
-
-                    else
-                    {
-                        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">
-                            @Model.EmailResult.Message
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    }
-                }
-
             </div>
         </form>
     </div>
@@ -268,6 +239,5 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/submitForm.js"></script>
 }
-
-<script src="~/js/submitForm.js"></script>

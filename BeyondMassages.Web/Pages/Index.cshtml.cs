@@ -11,9 +11,6 @@ public class IndexModel : PageModel
 {
     [BindProperty]
     public EmailModel EmailDetails { get; set; } = new EmailModel();
-    [BindProperty]
-    public EmailResult EmailResult { get; set; } = new EmailResult();
-    public bool ShowAlert => TempData.ContainsKey("ShowAlert") && (bool)TempData["ShowAlert"]!;
 
     private readonly IEmailService _emailService;
 
@@ -24,26 +21,21 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        if (TempData.ContainsKey("EmailResult"))
-        {
-            EmailResult = JsonSerializer.Deserialize<EmailResult>((string)TempData["EmailResult"]!)!;
-        }
+
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
         {
-            return Page();
+            var errors = ModelState.SelectMany(x => x.Value!.Errors.Select(e => e.ErrorMessage)).ToList();
+            return new JsonResult(new { success = false, message = errors });
         }
 
-        TempData["ShowAlert"] = true;
-
         PrepareMessage();
-        EmailResult = await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
-        TempData["EmailResult"] = JsonSerializer.Serialize(EmailResult);
+        var emailResult = await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
-        return RedirectToPage();
+        return new JsonResult(new { success = emailResult.IsSent, message = emailResult.Message });
     }
 
     private void PrepareMessage()
