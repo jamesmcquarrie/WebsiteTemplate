@@ -64,7 +64,7 @@
                             <div><i class="bi bi-telephone-fill"></i> 123-456-7890</div>
                             <div class="text-nowrap"><i class="bi bi-envelope-fill"></i> info@BeyondMassagesApp.com</div>
                             <div><i class="bi bi-geo-alt-fill"></i> Road name, Town, Post Code, Country</div>
-                            <div class="fw-light"><i class="bi bi-c-circle"></i> 2023 - Beyond Massages</div>
+                            <div class="fw-light"><i class="bi bi-c-circle"></i> @DateTime.Now.Year.ToString() - Beyond Massages</div>
                         </div>
                     </div>
 
@@ -80,7 +80,6 @@
             </div>
         </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         @await RenderSectionAsync("Scripts", required: false)

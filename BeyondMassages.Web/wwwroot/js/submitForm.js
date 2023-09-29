@@ -1,79 +1,58 @@
-﻿//document.addEventListener('DOMContentLoaded', function() {
-//    var submitButton = document.getElementById('submitButton');
-//    var form = document.querySelector('form');
+﻿document.addEventListener('DOMContentLoaded', function () {
+    var submitButton = document.getElementById('submitButton');
+    var form = document.querySelector('form');
 
-//    submitButton.addEventListener('click', function(e) {
-//        e.preventDefault();  // Prevent the form from submitting the traditional way
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); 
 
-//        if($(form).valid()) {  // Check if the form is valid
-//            submitButton.innerHTML = 'Sending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';  // Change button text and add spinner
-//            submitButton.setAttribute('disabled', 'disabled');  // Disable the button to prevent multiple submissions
-//            form.submit();  // Submit the form using JavaScript
-//        }
-//    });
-//});
+        if (form.checkValidity()) {  
 
-//$(function () {
-//    $('#submit').on('click', function (evt) {
-//        evt.preventDefault();
-//        $.post('', $('form').serialize(), function () {
-//            alert('Posted using jQuery');
-//        });
-//    });
-//});
+            submitButton.innerHTML = 'Sending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';  
+            submitButton.setAttribute('disabled', 'disabled');
 
-$(document).ready(function () {
-    var submitButton = $('#submitButton');
-    var form = $('form');
+            var formData = new URLSearchParams(new FormData(form));  // Convert form data to URLSearchParams
 
-    submitButton.on('click', function (e) {
-        e.preventDefault();
+            fetch('', {
+                method: form.getAttribute('method'),
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })                .then(response => response.json())
+                .then(data => {
+                    submitButton.innerHTML = 'Submit';
+                    submitButton.removeAttribute('disabled');
 
-        if ($(form).valid()) {
-            submitButton.html('Sending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');  // Change button text and add spinner
-            submitButton.attr('disabled', 'disabled');
-
-            var formData = $(form).serialize();
-
-            $.ajax({
-                url: form.attr('action'),
-                method: form.attr('method'),
-                data: formData,
-                contentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                success: function (response) {
-                    submitButton.html('Submit');
-                    submitButton.removeAttr('disabled');
-
-                    if (response.success) {
-                        $("#submitButton").after(
+                    if (data.success) {
+                        submitButton.insertAdjacentHTML('afterend',
                             '<div class="alert alert-success alert-dismissible fade show mt-3 mb-0">' +
-                            response.message +
+                            data.message +
                             '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
                             '</div>'
                         );
-                        form[0].reset();
+                        form.reset();
                     } else {
-                        $("#submitButton").after(
+                        submitButton.insertAdjacentHTML('afterend',
                             '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
-                            response.message +
+                            data.message +
                             '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
                             '</div>'
                         );
                     }
-                },
-                error: function () {
-                    submitButton.html('Submit');
-                    submitButton.removeAttr('disabled');
+                })
+                .catch(error => {
+                    submitButton.innerHTML = 'Submit';
+                    submitButton.removeAttribute('disabled');
 
-                    $("#submitButton").after(
+                    submitButton.insertAdjacentHTML('afterend',
                         '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
                         'There was an unexpected error while sending the email. Please try again later' +
                         '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
                         '</div>'
                     );
-                }
-            });
+                });
+        } else {
+            form.reportValidity();  
         }
     });
 });

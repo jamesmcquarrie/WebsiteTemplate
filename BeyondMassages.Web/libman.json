@@ -5,6 +5,17 @@
     {
       "library": "bootstrap@5.3.0",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "aspnet-client-validation@0.8.16",
+      "destination": "wwwroot/lib/aspnet-client-validation/",
+      "files": [
+        "dist/aspnet-validation.css",
+        "dist/aspnet-validation.js",
+        "dist/aspnet-validation.min.js",
+        "dist/aspnet-validation.min.js.map"
+      ]
     }
   ]
 }

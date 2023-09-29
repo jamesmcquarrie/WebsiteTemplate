@@ -3,7 +3,6 @@ using BeyondMassages.Web.Features.Contact.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net;
-using System.Text.Json;
 
 namespace BeyondMassagesApp.Pages;
 
@@ -44,6 +43,6 @@ public class IndexModel : PageModel
         EmailDetails.EmailAddress = WebUtility.HtmlEncode(EmailDetails.EmailAddress);
         EmailDetails.Subject = WebUtility.HtmlEncode(EmailDetails.Subject);
         EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message)
-            .Replace(Environment.NewLine, "<br>");
+            .ReplaceLineEndings("<br>");
     }
 }
