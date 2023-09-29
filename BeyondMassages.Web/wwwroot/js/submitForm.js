@@ -18,39 +18,40 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            })                .then(response => response.json())
-                .then(data => {
-                    submitButton.innerHTML = 'Submit';
-                    submitButton.removeAttribute('disabled');
+            })
+            .then(response => response.json())
+            .then(data => {
+                submitButton.innerHTML = 'Submit';
+                submitButton.removeAttribute('disabled');
 
-                    if (data.success) {
-                        submitButton.insertAdjacentHTML('afterend',
-                            '<div class="alert alert-success alert-dismissible fade show mt-3 mb-0">' +
-                            data.message +
-                            '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
-                            '</div>'
-                        );
-                        form.reset();
-                    } else {
-                        submitButton.insertAdjacentHTML('afterend',
-                            '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
-                            data.message +
-                            '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
-                            '</div>'
-                        );
-                    }
-                })
-                .catch(error => {
-                    submitButton.innerHTML = 'Submit';
-                    submitButton.removeAttribute('disabled');
-
+                if (data.success) {
                     submitButton.insertAdjacentHTML('afterend',
-                        '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
-                        'There was an unexpected error while sending the email. Please try again later' +
+                        '<div class="alert alert-success alert-dismissible fade show mt-3 mb-0">' +
+                        data.message +
                         '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
                         '</div>'
                     );
-                });
+                    form.reset();
+                } else {
+                    submitButton.insertAdjacentHTML('afterend',
+                        '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
+                        data.message +
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                        '</div>'
+                    );
+                }
+            })
+            .catch(error => {
+                submitButton.innerHTML = 'Submit';
+                submitButton.removeAttribute('disabled');
+
+                submitButton.insertAdjacentHTML('afterend',
+                    '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
+                    'There was an unexpected error while sending the email. Please try again later' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                    '</div>'
+                );
+            });
         } else {
             form.reportValidity();  
         }
