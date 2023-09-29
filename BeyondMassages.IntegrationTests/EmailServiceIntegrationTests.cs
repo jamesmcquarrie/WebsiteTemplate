@@ -121,7 +121,6 @@ public class EmailServiceIntegrationTests
         var result = await _emailService.SendEmailAsync(emailModel, cancellationToken);
 
         //Assert
-        Assert.True(result.IsCancelled);
         Assert.False(result.IsSent);
         Assert.Equal(StatusMessages.OperationCancelled, result.Message);
     }

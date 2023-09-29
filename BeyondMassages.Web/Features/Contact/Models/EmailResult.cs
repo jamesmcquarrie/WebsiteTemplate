@@ -4,6 +4,5 @@
     {
         public string Message { get; set; } = string.Empty;
         public bool IsSent { get; set; }
-        public bool IsCancelled { get; set; }
     }
 }

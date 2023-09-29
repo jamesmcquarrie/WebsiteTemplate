@@ -62,7 +62,6 @@ public class EmailService : IEmailService
         {
             _logger.LogWarning("Email sending operation was cancelled");
             emailResult.Message = StatusMessages.OperationCancelled;
-            emailResult.IsCancelled = true;
 
             return emailResult;
         }
