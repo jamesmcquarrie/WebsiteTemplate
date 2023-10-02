@@ -52,12 +52,6 @@ public class EmailService : IEmailService
             return emailResult;
         }
 
-        catch (AuthenticationException ex)
-        {
-            _logger.LogCritical(ex, "Client not authenticated to server", ex.Message);
-            throw;
-        }
-
         catch (OperationCanceledException)
         {
             _logger.LogWarning("Email sending operation was cancelled");

@@ -35,6 +35,37 @@ public class EmailServiceUnitTests
     }
 
     [Fact]
+    public async Task SendEmailAsync_EmailShouldBeSentSuccessfully()
+    {
+        //Arrange
+        _emailOptions.Value.Returns(new EmailOptions
+        {
+            UserName = "f4ed4305706a43",
+            Password = "387ffa2c63fdae",
+            Host = "sandbox.smtp.mailtrap.io",
+            Port = 587,
+            SecureSocketOptions = "StartTls"
+        });
+
+        var emailModel = new EmailModel
+        {
+            Name = "Test User",
+            EmailAddress = "testuser@testdomain.com",
+            Subject = "Test Subject",
+            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+        };
+
+        await _smtpClient.SendAsync(Arg.Any<MimeMessage>());
+
+        //Act
+        var result = await _emailService.SendEmailAsync(emailModel);
+
+        //Assert
+        Assert.True(result.IsSent);
+        Assert.Equal(StatusMessages.SuccessMessage, result.Message);
+    }
+
+    [Fact]
     public async Task SendEmailAsync_RaiseSmtpCommandException()
     {
         //Arrange
@@ -56,7 +87,7 @@ public class EmailServiceUnitTests
         };
 
         var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, StatusMessages.SmtpCommandError);
-        _smtpClient.SendAsync(Arg.Any<MimeMessage>(), Arg.Any<CancellationToken>())
+        _smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(smtpCommandException);
 
         //Act
@@ -65,6 +96,37 @@ public class EmailServiceUnitTests
         //Assert
         Assert.False(result.IsSent);
         Assert.Equal(StatusMessages.SmtpCommandError, result.Message);
+    }
+
+    [Fact]
+    public async Task SendEmailAsync_RaiseOperationCanceledException()
+    {
+        //Arrange
+        _emailOptions.Value.Returns(new EmailOptions
+        {
+            UserName = "f4ed4305706a43",
+            Password = "387ffa2c63fdae",
+            Host = "sandbox.smtp.mailtrap.io",
+            Port = 587,
+            SecureSocketOptions = "StartTls"
+        });
+
+        var emailModel = new EmailModel
+        {
+            Name = "Test User",
+            EmailAddress = "testuser@testdomain.com",
+            Subject = "Test Subject",
+            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+        };
+
+        var cancellationToken = new CancellationToken(true);
+
+        //Act
+        var result = await _emailService.SendEmailAsync(emailModel, cancellationToken);
+
+        //Assert
+        Assert.False(result.IsSent);
+        Assert.Equal(StatusMessages.OperationCancelled, result.Message);
     }
 
     [Fact]
@@ -89,7 +151,7 @@ public class EmailServiceUnitTests
         };
 
         var exception = new Exception(StatusMessages.GeneralError);
-        _smtpClient.SendAsync(Arg.Any<MimeMessage>(), Arg.Any<CancellationToken>())
+        _smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(exception);
 
         //Act

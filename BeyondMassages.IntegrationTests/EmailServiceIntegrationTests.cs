@@ -27,7 +27,7 @@ public class EmailServiceIntegrationTests
             .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
             .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
 
-        _smtpClient = new SmtpClient(new ProtocolLogger("Protocol.log"));
+        _smtpClient = new SmtpClient();
 
         _emailService = new EmailService(_logger,
             _emailOptions,
@@ -63,65 +63,5 @@ public class EmailServiceIntegrationTests
         //Assert
         Assert.True(result.IsSent);
         Assert.Equal(StatusMessages.SuccessMessage, result.Message);
-    }
-
-    [Fact]
-    public async Task SendEmailAsync_AuthenticationShouldFail()
-    {
-        //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
-        {
-            UserName = "f4ed4305706a43",
-            Password = "WRONG PASSWORD",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
-
-        var emailModel = new EmailModel
-        {
-            Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
-            Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
-        };
-
-        //Act
-
-        //Assert
-        await Assert.ThrowsAsync<AuthenticationException>(async () => 
-            await _emailService.SendEmailAsync(emailModel)
-        );
-    }
-
-    [Fact]
-    public async Task SendEmailAsync_RaiseOperationCanceledException()
-    {
-        //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
-        {
-            UserName = "f4ed4305706a43",
-            Password = "387ffa2c63fdae",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
-
-        var emailModel = new EmailModel
-        {
-            Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
-            Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
-        };
-
-        var cancellationToken = new CancellationToken(true);
-
-        //Act
-        var result = await _emailService.SendEmailAsync(emailModel, cancellationToken);
-
-        //Assert
-        Assert.False(result.IsSent);
-        Assert.Equal(StatusMessages.OperationCancelled, result.Message);
     }
 }
