@@ -2,16 +2,16 @@ using BeyondMassages.Web.Features.Contact.Common;
 using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Options;
 using BeyondMassages.Web.Features.Contact.Services;
-using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MimeKit;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 
-namespace BeyondMassages.Tests;
+namespace BeyondMassages.UnitTests.Email;
 
 public class EmailServiceUnitTests
 {
@@ -52,7 +52,7 @@ public class EmailServiceUnitTests
             Name = "Test User",
             EmailAddress = "testuser@testdomain.com",
             Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
         };
 
         await _smtpClient.SendAsync(Arg.Any<MimeMessage>());
@@ -83,7 +83,7 @@ public class EmailServiceUnitTests
             Name = "Test User",
             EmailAddress = "testuser@testdomain.com",
             Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
         };
 
         var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, StatusMessages.SmtpCommandError);
@@ -116,7 +116,7 @@ public class EmailServiceUnitTests
             Name = "Test User",
             EmailAddress = "testuser@testdomain.com",
             Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
         };
 
         var cancellationToken = new CancellationToken(true);
@@ -147,7 +147,7 @@ public class EmailServiceUnitTests
             Name = "Test User",
             EmailAddress = "testuser@testdomain.com",
             Subject = "Test Subject",
-            Message = "<p>Dear Test Admin,</p><p>This is a test message</p><p>Many Thanks,<br>Test User</p>",
+            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
         };
 
         var exception = new Exception(StatusMessages.GeneralError);
