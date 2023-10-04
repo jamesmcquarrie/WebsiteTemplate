@@ -31,18 +31,17 @@ public class IndexModel : PageModel
             return new JsonResult(new { isSent = false, message = errors });
         }
 
-        PrepareMessage();
+        SanitizeFormInput();
         var emailResult = await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
         return new JsonResult(new { isSent = emailResult.IsSent, message = emailResult.Message });
     }
 
-    private void PrepareMessage()
+    private void SanitizeFormInput()
     {
         EmailDetails.Name = WebUtility.HtmlEncode(EmailDetails.Name);
         EmailDetails.EmailAddress = WebUtility.HtmlEncode(EmailDetails.EmailAddress);
         EmailDetails.Subject = WebUtility.HtmlEncode(EmailDetails.Subject);
-        EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message)
-            .ReplaceLineEndings("<br>");
+        EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message);
     }
 }

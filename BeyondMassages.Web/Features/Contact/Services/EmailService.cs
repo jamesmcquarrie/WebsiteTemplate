@@ -1,11 +1,10 @@
 ﻿using BeyondMassages.Web.Features.Contact.Options;
+using BeyondMassages.Web.Features.Contact.Helpers;
 using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Common;
 using Microsoft.Extensions.Options;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using MimeKit;
-using MimeKit.Text;
 using Polly;
 
 namespace BeyondMassages.Web.Features.Contact.Services;
@@ -13,24 +12,27 @@ namespace BeyondMassages.Web.Features.Contact.Services;
 public class EmailService : IEmailService
 {
     private readonly ILogger<EmailService> _logger;
-    private readonly IOptions<EmailOptions> _emailOptions;
+    private readonly IEmailBuilder _emailBuilder;
+    private readonly EmailOptions _emailOptions;
     private readonly ISmtpClient _smtpClient;
     private readonly IAsyncPolicy _policy; 
 
-    public EmailService(ILogger<EmailService> logger, 
+    public EmailService(ILogger<EmailService> logger,
+        IEmailBuilder emailBuilder,
         IOptions<EmailOptions> emailOptions, 
         ISmtpClient smtpClient,
         IAsyncPolicy policy)
     {
         _logger = logger;
-        _emailOptions = emailOptions;
+        _emailBuilder = emailBuilder;
+        _emailOptions = emailOptions.Value;
         _smtpClient = smtpClient;
         _policy = policy;
     }
 
     public async Task<EmailResult> SendEmailAsync(EmailModel emailModel, CancellationToken cancellationToken = default)
     {
-        var email = ConstructEmail(emailModel);
+        var email = _emailBuilder.CreateMultipartEmail(emailModel);
         var emailResult = new EmailResult();
 
         try
@@ -86,10 +88,10 @@ public class EmailService : IEmailService
     private async Task ConnectAsync(CancellationToken ct)
     {
         await _smtpClient.ConnectAsync(
-            _emailOptions.Value.Host,
-            _emailOptions.Value.Port,
+            _emailOptions.Host,
+            _emailOptions.Port,
             Enum.Parse<SecureSocketOptions>(
-                _emailOptions.Value.SecureSocketOptions),
+                _emailOptions.SecureSocketOptions),
             ct);
     }
 
@@ -97,20 +99,8 @@ public class EmailService : IEmailService
     {
         await _smtpClient.AuthenticateAsync(
             new SaslMechanismCramMd5(
-                _emailOptions.Value.UserName,
-                _emailOptions.Value.Password),
+                _emailOptions.UserName,
+                _emailOptions.Password),
             ct);
-    }
-
-    private MimeMessage ConstructEmail(EmailModel emailModel)
-    {
-        var email = new MimeMessage();
-
-        email.From.Add(MailboxAddress.Parse(emailModel.EmailAddress));
-        email.To.Add(MailboxAddress.Parse(_emailOptions.Value.UserName));
-        email.Subject = $"{emailModel.Name} - {emailModel.Subject}";
-        email.Body = new TextPart(TextFormat.Html) { Text = $"<p>{emailModel.Message}</p>"  };
-
-        return email;
     }
 }

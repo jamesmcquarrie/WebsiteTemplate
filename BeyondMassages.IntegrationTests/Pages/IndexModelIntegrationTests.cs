@@ -1,6 +1,7 @@
 using BeyondMassages.IntegrationTests.Models;
 using BeyondMassages.Web.Features.Contact.Common;
 using BeyondMassages.Web.Features.Contact.Models;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -24,24 +25,22 @@ public class IndexModelIntegrationTests : IDisposable
         var postData = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("EmailDetails.Name", "Test User"),
-            new KeyValuePair<string, string>("EmailDetails.EmailAddress", "testuser@testdomain.com"),
+            new KeyValuePair<string, string>("EmailDetails.EmailAddress", "testuser@testuserdomain.com"),
             new KeyValuePair<string, string>("EmailDetails.Subject", "Test Subject"),
-            new KeyValuePair<string, string>("EmailDetails.Message", "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User")
+            new KeyValuePair<string, string>("EmailDetails.Message", "Dear Admin,\r\n\r\nThis is a test message.\r\n\r\nMany Thanks,\r\nTest User")
         };
 
         var formContent = new FormUrlEncodedContent(postData);
 
-        JsonSerializerOptions options = new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+        var serializerOptions = SetToCamelCase();
 
         //Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<EmailResult>(options);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<EmailResult>(serializerOptions);
 
         //Assert
         Assert.NotNull(deserializedResponse);
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         Assert.True(deserializedResponse.IsSent);
         Assert.Equal(StatusMessages.SuccessMessage, deserializedResponse.Message);
     }
@@ -60,17 +59,15 @@ public class IndexModelIntegrationTests : IDisposable
 
         var formContent = new FormUrlEncodedContent(invalidPostData);
 
-        JsonSerializerOptions options = new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+        var serializerOptions = SetToCamelCase();
 
         // Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(options);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
 
         // Assert
         Assert.NotNull(deserializedResponse);
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         Assert.False(deserializedResponse.IsSent);
         Assert.Contains("Please provide a name", deserializedResponse.Message!);
         Assert.Contains("Please provide an email address", deserializedResponse.Message!);
@@ -87,24 +84,30 @@ public class IndexModelIntegrationTests : IDisposable
             new KeyValuePair<string, string>("EmailDetails.Name", "Test User"),
             new KeyValuePair<string, string>("EmailDetails.EmailAddress", "invalidEmail"),
             new KeyValuePair<string, string>("EmailDetails.Subject", "Test Subject"),
-            new KeyValuePair<string, string>("EmailDetails.Message", "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User")
+            new KeyValuePair<string, string>("EmailDetails.Message", "Dear Admin,\r\n\r\nThis is a test message.\r\n\r\nMany Thanks,\r\nTest User")
         };
 
         var formContent = new FormUrlEncodedContent(invalidPostData);
 
-        JsonSerializerOptions options = new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+        var serializerOptions = SetToCamelCase();
 
         // Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(options);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
 
         // Assert
         Assert.NotNull(deserializedResponse);
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         Assert.False(deserializedResponse.IsSent);
         Assert.Contains("Please provide a valid email address", deserializedResponse.Message!);
+    }
+
+    private JsonSerializerOptions SetToCamelCase()
+    {
+        return new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
     }
 
     public void Dispose()
@@ -112,5 +115,4 @@ public class IndexModelIntegrationTests : IDisposable
         _factory.Dispose();
         _httpClient.Dispose();
     }
-
 }

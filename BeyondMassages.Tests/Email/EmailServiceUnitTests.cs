@@ -1,10 +1,11 @@
 using BeyondMassages.Web.Features.Contact.Common;
+using BeyondMassages.Web.Features.Contact.Helpers;
 using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Options;
 using BeyondMassages.Web.Features.Contact.Services;
-using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MailKit.Net.Smtp;
 using MimeKit;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
@@ -15,83 +16,103 @@ namespace BeyondMassages.UnitTests.Email;
 
 public class EmailServiceUnitTests
 {
-    private readonly IEmailService _emailService;
-    private readonly ILogger<EmailService> _logger = Substitute.For<ILogger<EmailService>>();
-    private readonly IOptions<EmailOptions> _emailOptions = Substitute.For<IOptions<EmailOptions>>();
-    private readonly IAsyncPolicy _policy;
-    private readonly ISmtpClient _smtpClient = Substitute.For<ISmtpClient>();
-
-    public EmailServiceUnitTests()
+    private IOptions<EmailOptions> GetEmailOptions()
     {
-        _policy = Policy
-            .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
-            .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
-
-        _emailService = new EmailService(_logger,
-            _emailOptions,
-            _smtpClient,
-            _policy
-        );
-    }
-
-    [Fact]
-    public async Task SendEmailAsync_EmailShouldBeSentSuccessfully()
-    {
-        //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
+        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
+        emailOptions.Value.Returns(new EmailOptions()
         {
             UserName = "f4ed4305706a43",
             Password = "387ffa2c63fdae",
+            IntermediaryEmailAddress = "hello@testdomain.com",
             Host = "sandbox.smtp.mailtrap.io",
             Port = 587,
             SecureSocketOptions = "StartTls"
         });
 
-        var emailModel = new EmailModel
+        return emailOptions;
+    }
+
+    private EmailModel CreateEmailModel()
+    {
+        return new EmailModel
         {
             Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
+            EmailAddress = "testuser@testuserdomain.com",
             Subject = "Test Subject",
-            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
+            Message = "Dear Admin,\r\n\r\nThis is a test message.\r\n\r\nMany Thanks,\r\nTest User",
         };
+    }
 
-        await _smtpClient.SendAsync(Arg.Any<MimeMessage>());
+    private IAsyncPolicy CreatePolicy()
+    {
+        return Policy
+            .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
+            .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
+    }
+
+    private ILogger<EmailService> CreateLogger()
+    {
+        return Substitute.For<ILogger<EmailService>>();
+    }
+
+    private ISmtpClient CreateSmtpClient()
+    {
+        return Substitute.For<ISmtpClient>();
+    }
+
+    private IEmailBuilder CreateEmailBuilder(IOptions<EmailOptions> emailOptions)
+    {
+        return new EmailBuilder(emailOptions);
+    }
+
+    private IEmailService CreateEmailService(ISmtpClient smtpClient, IAsyncPolicy policy)
+    {
+        var logger = CreateLogger();
+        var emailOptions = GetEmailOptions();
+        var emailBuilder = CreateEmailBuilder(emailOptions);
+
+        return new EmailService(logger,
+            emailBuilder,
+            emailOptions,
+            smtpClient,
+            policy);
+    }
+
+    [Fact]
+    public async Task SendEmailAsync_WithValidEmail_SendsSuccessfully()
+    {
+        //Arrange
+        var smtpClient = CreateSmtpClient();
+        var policy = CreatePolicy();    
+        var emailService = CreateEmailService(smtpClient, policy);
+
+        var emailModel = CreateEmailModel();
 
         //Act
-        var result = await _emailService.SendEmailAsync(emailModel);
+        var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
+        await smtpClient.Received().SendAsync(Arg.Any<MimeMessage>());
         Assert.True(result.IsSent);
         Assert.Equal(StatusMessages.SuccessMessage, result.Message);
     }
 
     [Fact]
-    public async Task SendEmailAsync_RaiseSmtpCommandException()
+    public async Task SendEmailAsync_RaisesSmtpCommandException_SendsUnsuccessfully()
     {
         //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
-        {
-            UserName = "f4ed4305706a43",
-            Password = "387ffa2c63fdae",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
+        var smtpClient = CreateSmtpClient();
+        var policy = CreatePolicy();    
+        var emailService = CreateEmailService(smtpClient, policy);
 
-        var emailModel = new EmailModel
-        {
-            Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
-            Subject = "Test Subject",
-            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
-        };
+        var emailModel = CreateEmailModel();
 
         var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, StatusMessages.SmtpCommandError);
-        _smtpClient.SendAsync(Arg.Any<MimeMessage>())
+        smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(smtpCommandException);
 
         //Act
-        var result = await _emailService.SendEmailAsync(emailModel);
+        var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
         Assert.False(result.IsSent);
@@ -99,30 +120,21 @@ public class EmailServiceUnitTests
     }
 
     [Fact]
-    public async Task SendEmailAsync_RaiseOperationCanceledException()
+    public async Task SendEmailAsync_RaisesOperationCanceledException_SendsUnsuccessfully()
     {
         //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
-        {
-            UserName = "f4ed4305706a43",
-            Password = "387ffa2c63fdae",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
+        var smtpClient = CreateSmtpClient();
+        var policy = CreatePolicy();
+        var emailService = CreateEmailService(smtpClient, policy);
 
-        var emailModel = new EmailModel
-        {
-            Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
-            Subject = "Test Subject",
-            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
-        };
+        var emailModel = CreateEmailModel();
 
-        var cancellationToken = new CancellationToken(true);
+        var operationCanceledException = new OperationCanceledException();
+        smtpClient.SendAsync(Arg.Any<MimeMessage>())
+            .ThrowsAsync(operationCanceledException);
 
         //Act
-        var result = await _emailService.SendEmailAsync(emailModel, cancellationToken);
+        var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
         Assert.False(result.IsSent);
@@ -130,32 +142,21 @@ public class EmailServiceUnitTests
     }
 
     [Fact]
-    public async Task SendEmailAsync_RaiseGeneralException()
+    public async Task SendEmailAsync_RaisesGeneralException_SendsUnsuccessfully()
     {
         //Arrange
-        _emailOptions.Value.Returns(new EmailOptions
-        {
-            UserName = "f4ed4305706a43",
-            Password = "387ffa2c63fdae",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
+        var smtpClient = CreateSmtpClient();
+        var policy = CreatePolicy();
+        var emailService = CreateEmailService(smtpClient, policy);
 
-        var emailModel = new EmailModel
-        {
-            Name = "Test User",
-            EmailAddress = "testuser@testdomain.com",
-            Subject = "Test Subject",
-            Message = "Dear Test Admin,<br><br>This is a test message.<br><br>Many Thanks,<br>Test User",
-        };
+        var emailModel = CreateEmailModel();
 
         var exception = new Exception(StatusMessages.GeneralError);
-        _smtpClient.SendAsync(Arg.Any<MimeMessage>())
+        smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(exception);
 
         //Act
-        var result = await _emailService.SendEmailAsync(emailModel);
+        var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
         Assert.False(result.IsSent);

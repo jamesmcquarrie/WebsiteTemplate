@@ -1,3 +1,4 @@
+using BeyondMassages.Web.Features.Contact.Helpers;
 using BeyondMassages.Web.Features.Contact.Options;
 using BeyondMassages.Web.Features.Contact.Services;
 using MailKit.Net.Smtp;
@@ -46,6 +47,7 @@ builder.Services.AddOptions<EmailOptions>()
     .ValidateOnStart();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailBuilder, EmailBuilder>();
 builder.Services.AddScoped<ISmtpClient, SmtpClient>();
 
 var policy = Policy
