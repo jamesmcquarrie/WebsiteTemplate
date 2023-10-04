@@ -10,7 +10,7 @@
             submitButton.innerHTML = 'Sending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';  
             submitButton.setAttribute('disabled', 'disabled');
 
-            var formData = new URLSearchParams(new FormData(form));  // Convert form data to URLSearchParams
+            var formData = new URLSearchParams(new FormData(form));
 
             fetch('', {
                 method: form.getAttribute('method'),
@@ -24,7 +24,7 @@
                 submitButton.innerHTML = 'Submit';
                 submitButton.removeAttribute('disabled');
 
-                if (data.success) {
+                if (data.isSent) {
                     submitButton.insertAdjacentHTML('afterend',
                         '<div class="alert alert-success alert-dismissible fade show mt-3 mb-0">' +
                         data.message +

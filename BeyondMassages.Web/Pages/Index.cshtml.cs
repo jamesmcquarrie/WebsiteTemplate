@@ -28,21 +28,20 @@ public class IndexModel : PageModel
         if (!ModelState.IsValid)
         {
             var errors = ModelState.SelectMany(x => x.Value!.Errors.Select(e => e.ErrorMessage)).ToList();
-            return new JsonResult(new { success = false, message = errors });
+            return new JsonResult(new { isSent = false, message = errors });
         }
 
-        PrepareMessage();
+        SanitizeFormInput();
         var emailResult = await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
-        return new JsonResult(new { success = emailResult.IsSent, message = emailResult.Message });
+        return new JsonResult(new { isSent = emailResult.IsSent, message = emailResult.Message });
     }
 
-    private void PrepareMessage()
+    private void SanitizeFormInput()
     {
         EmailDetails.Name = WebUtility.HtmlEncode(EmailDetails.Name);
         EmailDetails.EmailAddress = WebUtility.HtmlEncode(EmailDetails.EmailAddress);
         EmailDetails.Subject = WebUtility.HtmlEncode(EmailDetails.Subject);
-        EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message)
-            .ReplaceLineEndings("<br>");
+        EmailDetails.Message = WebUtility.HtmlEncode(EmailDetails.Message);
     }
 }
