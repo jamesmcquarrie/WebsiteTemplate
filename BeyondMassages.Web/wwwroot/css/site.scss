@@ -88,34 +88,33 @@ h4 {
 }
 
 @mixin transition-properties {
-    transition: border-color 1s ease, border-bottom 0.5s ease, width 1s ease;
+    transition: border-color 1s ease, width 1s ease;
 }
 
 .box-up-input {
     border: 2px solid transparent;
-    border-bottom: 1px solid $dark;
     border-radius: 0;
     width: 90%;
     @include transition-properties;
 
     &:hover,
     &:focus {
-        border-bottom: 2px solid $dark;
         border-color: $dark;
         width: 100%;
     }
 }
 
 .bordered-textarea {
-    border: 1px solid $dark;
+    border: 2px solid transparent;
     border-radius: 0;
-    transition: border 0.1s ease;
+    transition: border-color 1s ease;
     display: block;
+    max-height: 650px;
     width: 100%;
 
     &:hover,
     &:focus {
-        border: 2px solid $dark;
+        border-color: $dark;
     }
 }
 

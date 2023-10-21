@@ -17417,26 +17417,25 @@ h4, .h4 {
 
 .box-up-input {
   border: 2px solid transparent;
-  border-bottom: 1px solid #807563;
   border-radius: 0;
   width: 90%;
-  transition: border-color 1s ease, border-bottom 0.5s ease, width 1s ease;
+  transition: border-color 1s ease, width 1s ease;
 }
 .box-up-input:hover, .box-up-input:focus {
-  border-bottom: 2px solid #807563;
   border-color: #807563;
   width: 100%;
 }
 
 .bordered-textarea {
-  border: 1px solid #807563;
+  border: 2px solid transparent;
   border-radius: 0;
-  transition: border 0.1s ease;
+  transition: border-color 1s ease;
   display: block;
+  max-height: 650px;
   width: 100%;
 }
 .bordered-textarea:hover, .bordered-textarea:focus {
-  border: 2px solid #807563;
+  border-color: #807563;
 }
 
 .form-floating > .form-control.textarea-large,
