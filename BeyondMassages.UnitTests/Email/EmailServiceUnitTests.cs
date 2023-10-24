@@ -24,8 +24,8 @@ public class EmailServiceUnitTests
 
         //Assert
         await smtpClient.Received().SendAsync(Arg.Any<MimeMessage>());
-        Assert.True(result.IsSent);
-        Assert.Equal(StatusMessages.SuccessMessage, result.Message);
+        result.IsSent.Should().BeTrue();
+        result.Message.Should().Be(StatusMessages.SuccessMessage);
     }
 
     [Fact]
@@ -46,8 +46,8 @@ public class EmailServiceUnitTests
         var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
-        Assert.False(result.IsSent);
-        Assert.Equal(StatusMessages.SmtpCommandError, result.Message);
+        result.IsSent.Should().BeFalse();
+        result.Message.Should().Be(StatusMessages.SmtpCommandError);
     }
 
     [Fact]
@@ -68,8 +68,8 @@ public class EmailServiceUnitTests
         var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
-        Assert.False(result.IsSent);
-        Assert.Equal(StatusMessages.OperationCancelled, result.Message);
+        result.IsSent.Should().BeFalse();
+        result.Message.Should().Be(StatusMessages.OperationCancelled);
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public class EmailServiceUnitTests
         var result = await emailService.SendEmailAsync(emailModel);
 
         //Assert
-        Assert.False(result.IsSent);
-        Assert.Equal(StatusMessages.GeneralError, result.Message);
+        result.IsSent.Should().BeFalse();
+        result.Message.Should().Be(StatusMessages.GeneralError);
     }
 }

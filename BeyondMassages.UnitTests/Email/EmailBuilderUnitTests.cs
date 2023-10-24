@@ -16,11 +16,10 @@ public class EmailBuilderUnitTests
         var email = emailBuilder.CreateMultipartEmail(emailModel);
 
         //Assert
-        Assert.NotNull(email);
-        Assert.Equal(emailOptions.Value.IntermediaryEmailAddress, email.From.ToString());
-        Assert.Equal(emailOptions.Value.UserName, email.To.ToString());
-        Assert.Equal(emailModel.EmailAddress, email.ReplyTo.ToString());
-        Assert.Equal($"{emailModel.Name} ({emailModel.EmailAddress}) - {emailModel.Subject}", email.Subject.ToString());
+        email.From.ToString().Should().Be(emailOptions.Value.IntermediaryEmailAddress);
+        email.To.ToString().Should().Be(emailOptions.Value.UserName);
+        email.ReplyTo.ToString().Should().Be(emailModel.EmailAddress);
+        email.Subject.ToString().Should().Be($"{emailModel.Name} ({emailModel.EmailAddress}) - {emailModel.Subject}");
     }
 
     [Fact]
@@ -35,7 +34,7 @@ public class EmailBuilderUnitTests
         var email = emailBuilder.CreateMultipartEmail(emailModel);
 
         //Assert
-        Assert.Equal(emailModel.Message, email.TextBody);
+        email.TextBody.Should().Be(emailModel.Message);
     }
 
     [Fact]
@@ -51,6 +50,6 @@ public class EmailBuilderUnitTests
         var email = emailBuilder.CreateMultipartEmail(emailModel);
 
         //Assert
-        Assert.Equal(expectedHtmlMessage, email.HtmlBody);
+        email.HtmlBody.Should().Be(expectedHtmlMessage);
     }
 }

@@ -39,10 +39,15 @@ public class IndexModelIntegrationTests : IDisposable
         var deserializedResponse = await result.Content.ReadFromJsonAsync<EmailResult>(serializerOptions);
 
         //Assert
-        Assert.NotNull(deserializedResponse);
-        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.True(deserializedResponse.IsSent);
-        Assert.Equal(StatusMessages.SuccessMessage, deserializedResponse.Message);
+        deserializedResponse.Should().NotBeNull();
+        result.StatusCode.Should().Be(HttpStatusCode.OK);
+        deserializedResponse.IsSent.Should().BeTrue();
+        deserializedResponse.Message.Should().Be(StatusMessages.SuccessMessage);
+
+        //Assert.NotNull(deserializedResponse);
+        //Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        //Assert.True(deserializedResponse.IsSent);
+        //Assert.Equal(StatusMessages.SuccessMessage, deserializedResponse.Message);
     }
 
     [Fact]
@@ -66,13 +71,21 @@ public class IndexModelIntegrationTests : IDisposable
         var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
 
         // Assert
-        Assert.NotNull(deserializedResponse);
-        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.False(deserializedResponse.IsSent);
-        Assert.Contains("Please provide a name", deserializedResponse.Message!);
-        Assert.Contains("Please provide an email address", deserializedResponse.Message!);
-        Assert.Contains("Please provide a subject", deserializedResponse.Message!);
-        Assert.Contains("Please provide a message to send", deserializedResponse.Message!);
+        deserializedResponse.Should().NotBeNull();
+        result.StatusCode.Should().Be(HttpStatusCode.OK);
+        deserializedResponse.IsSent.Should().BeFalse();
+        deserializedResponse.Message.Should().Contain("Please provide a name");
+        deserializedResponse.Message.Should().Contain("Please provide an email address");
+        deserializedResponse.Message.Should().Contain("Please provide a subject");
+        deserializedResponse.Message.Should().Contain("Please provide a message to send");
+
+        //Assert.NotNull(deserializedResponse);
+        //Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        //Assert.False(deserializedResponse.IsSent);
+        //Assert.Contains("Please provide a name", deserializedResponse.Message!);
+        //Assert.Contains("Please provide an email address", deserializedResponse.Message!);
+        //Assert.Contains("Please provide a subject", deserializedResponse.Message!);
+        //Assert.Contains("Please provide a message to send", deserializedResponse.Message!);
     }
 
     [Fact]
@@ -96,10 +109,15 @@ public class IndexModelIntegrationTests : IDisposable
         var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
 
         // Assert
-        Assert.NotNull(deserializedResponse);
-        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.False(deserializedResponse.IsSent);
-        Assert.Contains("Please provide a valid email address", deserializedResponse.Message!);
+        deserializedResponse.Should().NotBeNull();
+        result.StatusCode.Should().Be(HttpStatusCode.OK);
+        deserializedResponse.IsSent.Should().BeFalse();
+        deserializedResponse.Message.Should().Contain("Please provide a valid email address");
+
+        //Assert.NotNull(deserializedResponse);
+        //Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        //Assert.False(deserializedResponse.IsSent);
+        //Assert.Contains("Please provide a valid email address", deserializedResponse.Message!);
     }
 
     private JsonSerializerOptions SetToCamelCase()
