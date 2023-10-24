@@ -1,59 +1,108 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    var submitButton = document.getElementById('submitButton');
-    var form = document.querySelector('form');
+﻿(function (app) {
+    'use-strict';
+    const pageItems = {};
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault(); 
+    app.indexStartup = () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            pageItems.form = document.getElementById('contactForm');
+            pageItems.submitButton = document.getElementById('submitButton');
 
-        if (form.checkValidity()) {  
+            pageItems.form.addEventListener('submit', handleFormSubmission);
+        })
+    }
 
-            submitButton.innerHTML = 'Sending... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';  
-            submitButton.setAttribute('disabled', 'disabled');
+    function handleFormSubmission(e) {
+        e.preventDefault();
 
-            var formData = new URLSearchParams(new FormData(form));
+        if (pageItems.form.checkValidity()) {
 
-            fetch('', {
-                method: form.getAttribute('method'),
-                body: formData,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            changeSubmitButton();
+            const formData = new URLSearchParams(new FormData(pageItems.form));
+
+            submitEmail(formData);
+
+        } else {
+            pageItems.form.reportValidity();
+        };
+    }
+
+    function submitEmail(formData) {
+        fetch('', {
+            method: pageItems.form.getAttribute('method'),
+            body: formData,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
             .then(response => response.json())
             .then(data => {
-                submitButton.innerHTML = 'Submit';
-                submitButton.removeAttribute('disabled');
-
                 if (data.isSent) {
-                    submitButton.insertAdjacentHTML('afterend',
-                        '<div class="alert alert-success alert-dismissible fade show mt-3 mb-0">' +
-                        data.message +
-                        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
-                        '</div>'
-                    );
-                    form.reset();
+                    displayAlert(true, data.message);
                 } else {
-                    submitButton.insertAdjacentHTML('afterend',
-                        '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
-                        data.message +
-                        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
-                        '</div>'
-                    );
+                    displayAlert(false, data.message);
                 }
             })
-            .catch(error => {
-                submitButton.innerHTML = 'Submit';
-                submitButton.removeAttribute('disabled');
-
-                submitButton.insertAdjacentHTML('afterend',
-                    '<div class="alert alert-danger alert-dismissible fade show mt-3 mb-0">' +
-                    'There was an unexpected error while sending the email. Please try again later' +
-                    '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
-                    '</div>'
-                );
+            .catch(() => {
+                const errorMessage = 'There was an unexpected error while sending the email. Please try again later';
+                displayAlert(false, errorMessage);
+            })
+            .finally(() => {
+                pageItems.form.reset();
+                resetSubmitButton();
             });
+    }
+
+    function changeSubmitButton() {
+        pageItems.submitButton.replaceChildren();
+
+        const fragment = new DocumentFragment();
+
+        const textNode = document.createTextNode('Sending... ');
+        fragment.appendChild(textNode);
+
+        const spinnerSpan = document.createElement('span');
+        spinnerSpan.className = 'spinner-border spinner-border-sm';
+        spinnerSpan.setAttribute('role', 'status');
+        fragment.appendChild(spinnerSpan);
+
+        pageItems.submitButton.appendChild(fragment);
+        pageItems.submitButton.disabled = true;
+    }
+
+    function resetSubmitButton() {
+        pageItems.submitButton.replaceChildren();
+
+        const fragment = new DocumentFragment();
+
+        const textNode = document.createTextNode('Submit');
+        fragment.appendChild(textNode);
+
+        pageItems.submitButton.appendChild(fragment);
+        pageItems.submitButton.disabled = false
+    }
+
+    function displayAlert(isSuccess, message) {
+        const fragment = new DocumentFragment();
+        const alert = document.createElement('div');
+        const icon = document.createElement('i');
+        const textNode = document.createTextNode(` ${message}`);
+        const closeButton = document.createElement('button');
+
+        closeButton.type = 'button';
+        closeButton.className = 'btn-close';
+        closeButton.dataset.bsDismiss = 'alert';
+
+        if (isSuccess) {
+            icon.className = 'bi bi-check-circle-fill';
+            alert.className = `alert alert-success alert-dismissible fade show mt-3 mb-0`;
         } else {
-            form.reportValidity();  
+            icon.className = 'bi bi-x-circle-fill';
+            alert.className = `alert alert-danger alert-dismissible fade show mt-3 mb-0`;
         }
-    });
-});
+
+        fragment.append(icon, textNode, closeButton);
+        alert.appendChild(fragment);
+
+        pageItems.submitButton.insertAdjacentElement('afterend', alert);
+    }
+})(window.app = window.app || {});
