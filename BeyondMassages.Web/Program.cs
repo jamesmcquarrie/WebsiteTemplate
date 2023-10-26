@@ -3,6 +3,7 @@ using BeyondMassages.Web.Features.Contact.Options;
 using BeyondMassages.Web.Features.Contact.Services;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
+using Joonasw.AspNetCore.SecurityHeaders;
 using Polly;
 using Polly.Contrib.WaitAndRetry;
 
@@ -18,28 +19,12 @@ builder.Services.AddRazorPages()
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-// https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0
-//builder.Services.AddHsts(options =>
-//{
-//    options.Preload = true;
-//    options.IncludeSubDomains = true;
-//    options.MaxAge = TimeSpan.FromDays(365);
-//    options.ExcludedHosts.Add("example.com");
-//    options.ExcludedHosts.Add("www.example.com");
-//});
-
-// https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-7.0
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowSpecificOrigins",
-//                      builder =>
-//                      {
-//                          builder.WithOrigins("http://example.com",
-//                                              "https://another-example.com")
-//                                 .AllowAnyHeader()
-//                                 .AllowAnyMethod();
-//                      });
-//});
+builder.Services.AddHsts(options =>
+{
+    options.Preload = true;
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(30);
+});
 
 builder.Services.AddOptions<EmailOptions>()
     .BindConfiguration("EmailOptions")
@@ -62,23 +47,39 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
 else
 {
     app.UseExceptionHandler("/Error");
     app.UseStatusCodePagesWithReExecute("/Http-Error/{0}");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
     app.UseHsts();
-    app.Use(async (context, next) =>
+    app.UseXFrameOptions();
+    app.UseXContentTypeOptions();
+    app.UseXXssProtection();
+    app.UseReferrerPolicy();
+
+    app.UseCsp(options =>
     {
-        if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
-        {
-            context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; " +
-                "style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; " +
-                "font-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; " +
-                "img-src 'self' data: https://www.w3.org");
-        }
-        await next();
+        options.ByDefaultAllow
+            .FromSelf();
+
+        options.AllowScripts
+            .FromSelf();
+
+        options.AllowStyles
+            .FromSelf()
+            .From("https://cdn.jsdelivr.net")
+            .From("https://fonts.googleapis.com");
+
+        options.AllowFonts
+            .FromSelf()
+            .From("https://cdn.jsdelivr.net")
+            .From("https://fonts.googleapis.com")
+            .From("https://fonts.gstatic.com");
+
+        options.AllowImages
+            .FromSelf()
+            .From("data: https://www.w3.org");        
     });
 }
 

@@ -11,7 +11,7 @@
     <div class="container-fluid p-0">
         <div class="hero-image">
             <div class="text-light text-center">
-                <h1 class="display-5">Hero Image</h1>
+                <h1 class="display-3">Hero Image</h1>
                 <p class="fs-4">Here is a sentence worth of subtext...</p>
                 <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-page="/Services/Index">Browse our Services</a>
             </div>
@@ -26,14 +26,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-4 py-sm-5">
-                <img class="img-fluid" alt="massage therapist" src="~/images/pexels-mart-production-8217536.jpg" />
+                <img class="img-fluid" alt="massage therapist" src="~/images/pexels-mart-production-8217536.jpg" asp-append-version="true" width="420px" height="420px"/>
             </div>
 
             <div class="col-12 col-lg-6 py-4 py-sm-5">
                 <div class="text-container-sm-75 text-container-xxxxl-50">
-                    <div class="text-center text-lg-center pb-4 pb-sm-5">
-                        <h2 class="display-6 mb-0 fw-normal">About</h2>
-                    </div>
+                    <h2 class="display-5 text-center text-lg-center pb-4">About</h2>
                     <div>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -59,15 +57,13 @@
 
 <section class="bg-primary py-4 py-sm-5">
     <div class="container-fluid">
-        <div class="d-flex justify-content-center pb-4 pb-sm-5">
-            <h2 class="display-6 mb-0 fw-normal">Services</h2>
-        </div>
+        <h2 class="display-5 text-center text-lg-center pb-4 pb-sm-5">Services</h2>
 
         <div class="row d-flex justify-content-evenly mx-lg-4">
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-xxl-0">
                     <a asp-page="/Services/Service-One">
-                        <img class="img-fluid card-img-top" src="~/images/pexels-andrea-piacquadio-3764568.jpg" />
+                        <img class="img-fluid card-img-top" alt="massage therapist performing service one" src="~/images/pexels-andrea-piacquadio-3764568.jpg" asp-append-version="true" width="800px" height="533px" />
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">Service One</h4>
@@ -76,7 +72,7 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-One">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-One">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +80,7 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-xxl-0">
                     <a asp-page="/Services/Service-Two">
-                        <img class="img-fluid card-img-top" src="~/images/pexels-antoni-shkraba-4599374.jpg" />
+                        <img class="img-fluid card-img-top" alt="massage therapist performing service two" src="~/images/pexels-antoni-shkraba-4599374.jpg" asp-append-version="true" width="800px" height="533px" />
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">Service Two</h4>
@@ -93,7 +89,7 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Two">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Two">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -101,7 +97,7 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card mb-4 mb-sm-0">
                     <a asp-page="/Services/Service-Three">
-                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663378.jpg" />
+                        <img class="img-fluid card-img-top" alt="massage therapist performing service two" src="~/images/pexels-arina-krasnikova-6663378.jpg" asp-append-version="true" width="800px" height="533px" />
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">Service Three</h4>
@@ -110,7 +106,7 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Three">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Three">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -118,7 +114,7 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card">
                     <a asp-page="/Services/Service-Four">
-                        <img class="img-fluid card-img-top" src="~/images/pexels-arina-krasnikova-6663361.jpg" />
+                        <img class="img-fluid card-img-top" alt="massage therapist performing service four" src="~/images/pexels-arina-krasnikova-6663361.jpg" asp-append-version="true" width="800px" height="533px" />
                     </a>
                     <div class="card-body">
                         <h4 class="card-title">Service Four</h4>
@@ -127,7 +123,7 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Tempor nec feugiat nisl pretium fusce id velit.
                         </p>
-                        <a class="btn btn-info rounded-0 mt-auto" role="button" asp-page="/Services/Service-Four">Learn More</a>
+                        <a class="btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Four">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -140,9 +136,7 @@
 
 <section class="bg-primary-subtle py-4 py-sm-5">
     <div class="container-fluid">
-        <div class="d-flex justify-content-center pb-4 pb-sm-5">
-            <h2 class="display-6 mb-0 fw-normal">Testimonials</h2>
-        </div>
+        <h2 class="display-5 text-center text-lg-center pb-4 pb-sm-5">Testimonials</h2>
 
         <div class="row mx-sm-2">
             <div class="col-12 col-xl-4 d-flex justify-content-center">
@@ -230,7 +224,7 @@
                     <span asp-validation-for="EmailDetails.Message" class="text-danger" />
                 </div>
 
-                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-0">Submit</button>
+                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-0 text-light">Submit</button>
             </div>
         </form>
     </div>
@@ -239,6 +233,6 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/submitForm.js"></script>
-    <script src="~/js/indexInit.js"></script>
+    <script src="~/js/submitForm.js" asp-append-version="true"></script>
+    <script src="~/js/indexInit.js" asp-append-version="true"></script>
 }

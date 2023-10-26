@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="frame-src https://www.google.com;">
     <title>@ViewData["Title"] | Beyond Massages</title>
-    <link rel="icon" type="image/x-icon" href="favicon-light.ico" media="(prefers-color-scheme: light)"/>
-    <link rel="icon" type="image/x-icon" href="favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/x-icon" href="~/favicon-light.ico" media="(prefers-color-scheme: light)"/>
+    <link rel="icon" type="image/x-icon" href="~/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -16,7 +16,7 @@
             <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-primary-subtle border-bottom box-shadow">
                 <div class="container">
                     <a class="navbar-brand" asp-page="/Index">
-                    <img src="~/images/beyond-massages.png" width="250px" height="52px" />
+                    <img src="~/images/beyond-massages.png" width="250px" height="52px" asp-append-version="true" />
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
                                 <a class="nav-link" asp-page="/Index" asp-fragment="contact">Contact Us</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="btn btn-info rounded-0" tabindex="-1" role="button" aria-disabled="true">Book Now</a>
+                                <a href="#" class="btn btn-info rounded-0 text-light" tabindex="-1" role="button" aria-disabled="true">Book Now</a>
                             </li>
                         </ul>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="col-auto d-flex justify-content-center mx-auto mx-sm-0 mt-2 mt-sm-0">
                         <div class="vstack text-center text-sm-start gap-1">
                             <div><i class="bi bi-telephone-fill"></i> 123-456-7890</div>
-                            <div class="text-nowrap"><i class="bi bi-envelope-fill"></i> info@BeyondMassagesApp.com</div>
+                            <div class="text-nowrap"><i class="bi bi-envelope-fill"></i> info@BeyondMassages.com</div>
                             <div><i class="bi bi-geo-alt-fill"></i> Road name, Town, Post Code, Country</div>
                             <div class="fw-light"><i class="bi bi-c-circle"></i> @DateTime.Now.Year.ToString() - Beyond Massages</div>
                         </div>
