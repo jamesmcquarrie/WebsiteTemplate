@@ -1,5 +1,6 @@
 ﻿using BeyondMassages.Web.Features.Contact.Models;
 using BeyondMassages.Web.Features.Contact.Options;
+using BeyondMassages.Web.Features.Contact.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
@@ -7,10 +8,13 @@ namespace BeyondMassages.Web.Features.Contact.Helpers;
 
 public class EmailBuilder : IEmailBuilder
 {
+    private readonly ILogger<EmailBuilder> _logger;
     private readonly EmailOptions _emailOptions;
 
-    public EmailBuilder(IOptions<EmailOptions> emailOptions)
+    public EmailBuilder(ILogger<EmailBuilder> logger,
+        IOptions<EmailOptions> emailOptions)
     {
+        _logger = logger;
         _emailOptions = emailOptions.Value;
     }
 
@@ -24,6 +28,8 @@ public class EmailBuilder : IEmailBuilder
         email.Subject = $"{emailModel.Name} ({emailModel.EmailAddress}) - {emailModel.Subject}";
         email.Body = CreateBodyBuilder(emailModel.Message)
             .ToMessageBody();
+
+        _logger.LogInformation("Email has been constructed");
 
         return email;
     }

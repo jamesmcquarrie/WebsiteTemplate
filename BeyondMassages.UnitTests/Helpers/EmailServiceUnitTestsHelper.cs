@@ -13,47 +13,9 @@ namespace BeyondMassages.UnitTests.Helpers;
 
 public static class EmailServiceUnitTestsHelper
 {
-    public static IOptions<EmailOptions> GetEmailOptions()
-    {
-        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
-        emailOptions.Value.Returns(new EmailOptions()
-        {
-            UserName = "f4ed4305706a43",
-            Password = "387ffa2c63fdae",
-            IntermediaryEmailAddress = "hello@testdomain.com",
-            Host = "sandbox.smtp.mailtrap.io",
-            Port = 587,
-            SecureSocketOptions = "StartTls"
-        });
-
-        return emailOptions;
-    }
-
-    public static ILogger<EmailService> CreateLogger()
-    {
-        return Substitute.For<ILogger<EmailService>>();
-    }
-
-    public static ISmtpClient CreateSmtpClient()
-    {
-        return Substitute.For<ISmtpClient>();
-    }
-
-    public static IAsyncPolicy CreatePolicy()
-    {
-        return Policy
-            .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
-            .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
-    }
-
-    public static IEmailBuilder CreateEmailBuilder(IOptions<EmailOptions> emailOptions)
-    {
-        return new EmailBuilder(emailOptions);
-    }
-
     public static IEmailService CreateEmailService(ISmtpClient smtpClient, IAsyncPolicy policy)
     {
-        var logger = CreateLogger();
+        var logger = CreateEmailServiceLogger();
         var emailOptions = GetEmailOptions();
         var emailBuilder = CreateEmailBuilder(emailOptions);
 
@@ -73,5 +35,49 @@ public static class EmailServiceUnitTestsHelper
             Subject = "Test Subject",
             Message = "Dear Admin,\r\n\r\nThis is a test message.\r\n\r\nMany Thanks,\r\nTest User",
         };
+    }
+
+    private static IOptions<EmailOptions> GetEmailOptions()
+    {
+        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
+        emailOptions.Value.Returns(new EmailOptions()
+        {
+            UserName = "f4ed4305706a43",
+            Password = "387ffa2c63fdae",
+            IntermediaryEmailAddress = "hello@testdomain.com",
+            Host = "sandbox.smtp.mailtrap.io",
+            Port = 587,
+            SecureSocketOptions = "StartTls"
+        });
+
+        return emailOptions;
+    }
+
+    public static ISmtpClient CreateSmtpClient()
+    {
+        return Substitute.For<ISmtpClient>();
+    }
+
+    public static IAsyncPolicy CreatePolicy()
+    {
+        return Policy
+            .Handle<SmtpCommandException>(ex => (int)ex.StatusCode >= 400 && (int)ex.StatusCode <= 500)
+            .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 3));
+    }
+
+    private static IEmailBuilder CreateEmailBuilder(IOptions<EmailOptions> emailOptions)
+    {
+        var logger = CreateEmailBuilderLogger();
+        return new EmailBuilder(logger, emailOptions);
+    }
+
+    private static ILogger<EmailService> CreateEmailServiceLogger()
+    {
+        return Substitute.For<ILogger<EmailService>>();
+    }
+
+    private static ILogger<EmailBuilder> CreateEmailBuilderLogger()
+    {
+        return Substitute.For<ILogger<EmailBuilder>>();
     }
 }

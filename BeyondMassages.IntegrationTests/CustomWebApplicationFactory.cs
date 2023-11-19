@@ -23,7 +23,7 @@ public class CustomWebApplicationFactory :  WebApplicationFactory<Program>
                 });
 
             var mockSmtpClient = Substitute.For<ISmtpClient>();
-            await mockSmtpClient.SendAsync(Arg.Any<MimeMessage>());
+            mockSmtpClient.SendAsync(Arg.Any<MimeMessage>()).Returns("Email was sent!"); // sets behaviour for 'SendAsync' method
 
             services.AddSingleton(mockSmtpClient);
         });

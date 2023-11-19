@@ -14,10 +14,9 @@ public class EmailServiceUnitTests
     {
         //Arrange
         var smtpClient = EmailServiceUnitTestsHelper.CreateSmtpClient();
-        var policy = EmailServiceUnitTestsHelper.CreatePolicy();    
-        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
-
+        var policy = EmailServiceUnitTestsHelper.CreatePolicy();
         var emailModel = EmailServiceUnitTestsHelper.CreateEmailModel();
+        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
 
         //Act
         var result = await emailService.SendEmailAsync(emailModel);
@@ -33,10 +32,9 @@ public class EmailServiceUnitTests
     {
         //Arrange
         var smtpClient = EmailServiceUnitTestsHelper.CreateSmtpClient();
-        var policy = EmailServiceUnitTestsHelper.CreatePolicy();    
-        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
-
+        var policy = EmailServiceUnitTestsHelper.CreatePolicy();
         var emailModel = EmailServiceUnitTestsHelper.CreateEmailModel();
+        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
 
         var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, StatusMessages.SmtpCommandError);
         smtpClient.SendAsync(Arg.Any<MimeMessage>())
@@ -56,9 +54,8 @@ public class EmailServiceUnitTests
         //Arrange
         var smtpClient = EmailServiceUnitTestsHelper.CreateSmtpClient();
         var policy = EmailServiceUnitTestsHelper.CreatePolicy();
-        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
-
         var emailModel = EmailServiceUnitTestsHelper.CreateEmailModel();
+        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
 
         var operationCanceledException = new OperationCanceledException();
         smtpClient.SendAsync(Arg.Any<MimeMessage>())
@@ -78,9 +75,8 @@ public class EmailServiceUnitTests
         //Arrange
         var smtpClient = EmailServiceUnitTestsHelper.CreateSmtpClient();
         var policy = EmailServiceUnitTestsHelper.CreatePolicy();
-        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
-
         var emailModel = EmailServiceUnitTestsHelper.CreateEmailModel();
+        var emailService = EmailServiceUnitTestsHelper.CreateEmailService(smtpClient, policy);
 
         var exception = new Exception(StatusMessages.GeneralError);
         smtpClient.SendAsync(Arg.Any<MimeMessage>())
