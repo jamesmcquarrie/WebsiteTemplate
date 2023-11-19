@@ -1,4 +1,4 @@
-$primary: #f2e4d1;
+$primary: #f4d7bd;
 $secondary: #cfd6ce;
 $success: #b9f2d1;
 $info: #5b90b7;
@@ -8,11 +8,8 @@ $light: #ffffff;
 $dark: #807563;
 
 @import "../lib/bootstrap/scss/bootstrap";
-@import "../lib/bootstrap/scss/_functions.scss";
-@import "../lib/bootstrap/scss/_variables.scss";
-@import "../lib/bootstrap/scss/_variables-dark.scss";
 @import "../lib/bootstrap/scss/_utilities.scss";
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 $utilities: map-merge(
   $utilities, (
@@ -26,27 +23,44 @@ $utilities: map-merge(
 @import "../lib/bootstrap/scss/utilities/_api.scss";
 
 html {
-    font-size: 18px;
     position: relative;
-    min-height: 100%;
-}
-
-body {
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Merriweather', serif;
+.btn {
+    font-size: inherit;
 }
 
-/*h2 {
-    font-size: 3rem;
+.btn-lg {
+    font-size: 1.25em;
 }
 
-h4 {
-    padding-bottom: 15px;
+.blockquote {
+    position: relative;
+    padding-left: 50px;
+    font-size: 1.25em;
 }
-*/
+
+.blockquote-footer {
+    position: relative;
+    padding-left: 50px;
+}
+
+.quotation-mark {
+    position: absolute;
+    left: 10px;
+}
+
+.svg-dimensions {
+    width: 32px;
+    height: 32px;
+}
+
+.svg-margin {
+    margin: 10px;
+}
+
 .navbar-toggler {
     border: none;
 }
@@ -60,7 +74,7 @@ h4 {
 .hero-image {
     display: flex;
     width: 100%;
-    height: 50vh;
+    height: 45vh;
     flex-direction: column;
     background-image: url("../images/stones-3184610_1920-960.jpg");
     align-self: center;
@@ -76,24 +90,19 @@ h4 {
     height: 30vh;
 }
 
-.svg-dimensions {
-    width: 42px;
-    height: 42px;
-}
-
-.svg-margin {
-    margin: 10px;
-}
-
 @mixin transition-properties {
     transition: border-color 1s ease, width 1s ease;
 }
 
-.box-up-input {
+@mixin box-border {
     border: 2px solid transparent;
     border-radius: 0;
-    width: 90%;
+}
+
+.box-up-input {
+    @include box-border;
     @include transition-properties;
+    width: 90%;
 
     &:hover,
     &:focus {
@@ -103,12 +112,8 @@ h4 {
 }
 
 .bordered-textarea {
-    border: 2px solid transparent;
-    border-radius: 0;
+    @include box-border;
     transition: border-color 1s ease;
-    display: block;
-    max-height: 650px;
-    width: 100%;
 
     &:hover,
     &:focus {
@@ -120,6 +125,7 @@ h4 {
 .form-floating > .form-select.textarea-large {
     height: 150px;
     min-height: 150px;
+    max-height: 450px;
 }
 
 .textarea-pre-line {
@@ -132,33 +138,45 @@ h4 {
 @media (prefers-color-scheme: light) {
 }
 
-@media (max-width: 575.98px) {
-    body {
-        font-size: 14px;
-    }
-
-    .svg-dimensions-xs {
-        width: 32px;
-        height: 32px;
-    }
-}
-
 @media (min-width: 576px) {
+    html {
+        font-size: 18px;
+    }
+
+    .blockquote {
+        padding-left: 60px;
+    }
+
+    .blockquote-footer {
+        padding-left: 60px;
+    }
+
+    .svg-dimensions {
+        width: 42px;
+        height: 42px;
+    }
+
     .text-container-sm-75 {
         max-width: 75%;
         margin: 0 auto;
     }
 }
 
-@media (min-width: 768px) {
-    .shrink-image-md-50 {
-        max-width: 50%;
-    }
-}
-
 @media (min-width: 992px) {
     .text-container-lg-50 {
         max-width: 50%;
+        margin: 0 auto;
+    }
+
+    .text-container-lg-75 {
+        max-width: 75%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .text-container-xl-75 { 
+        max-width: 75%;
         margin: 0 auto;
     }
 }
@@ -168,10 +186,14 @@ h4 {
         max-width: 75%;
         margin: 0 auto;
     }
+
+    .height-1200-xxl {
+        height: 1200px;
+    }
 }
 
 @media (min-width: 1900px) {
-    .text-container-xxxxl-50 {
+    .text-container-xxxl-50 {
         max-width: 50%;
         margin: 0 auto;
     }

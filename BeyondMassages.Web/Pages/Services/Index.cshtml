@@ -17,90 +17,86 @@
 
 @*Services*@
 
-
 <section class="bg-light-subtle py-4 py-sm-5">
     <div class="container-fluid container-sm">
-        <div class="card border border-2 mb-4 mx-lg-4 d-flex flex-column">
-            <div class="row justify-content-evenly g-0">
-                <div class="col-12 col-lg d-flex justify-content-center justify-content-lg-start">
-                    <a asp-page="/Services/Service-One">
-                        <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Massage Therapist performing the MOT"
-                        src="~/images/pexels-arina-krasnikova-6663378.jpg" asp-append-version="true" width="800px" height="533px" />
-                    </a>
-                </div>
-                <div class="col-12 col-lg d-flex align-items-center">
-                    <div class="card-body">
-                        <h4 class="card-title">MOT</h4>
-                        <p>
-                            A targeted 30-minute treatment designed to provide optimal results in one area, such as adressing lower back pain.
-                        </p>
-                        <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-One">Learn More</a>
+        <div class="row row-cols-1 mx-lg-4 mx-2">
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg px-0">
+                        <a asp-page="/Services/MOT">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Massage Therapist performing the MOT"
+                                 src="~/images/pexels-arina-krasnikova-6663378.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">MOT</h4>
+                            <p class="card-text">A targeted 30-minute treatment designed to provide optimal results in one area, such as adressing lower back pain.</p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/MOT">Learn More</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card border border-2 mb-4 mx-lg-4 d-flex flex-column">
-            <div class="row justify-content-evenly g-0">
-                <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Sports Massage</h4>
-                        <p>
-                            Revitalize your body with our Sports Massage, a full-body treatment ideal for those with multiple issues
-                            or chronic discomfort.
-                        </p>
-                        <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Two">Learn More</a>
-                    
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Sports Massage</h4>
+                            <p class="card-text">
+                                Revitalize your body with our Sports Massage, a full-body treatment ideal for those with multiple issues
+                                or chronic discomfort.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Sports-Massage">Learn More</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-lg order-1 order-lg-2 d-flex justify-content-end">
-                    <a asp-page="/Services/Service-Two">
-                        <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Massage Therapist performing the Sports Massage"
-                        src="~/images/pexels-ryutaro-tsukata-5473182-resized.jpg" asp-append-version="true" width="800px" height="533px">                       
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card border border-2 mb-4 mx-lg-4 d-flex flex-column">
-            <div class="row justify-content-evenly g-0">
-                <div class="col-12 col-lg d-flex justify-content-center justify-content-lg-start">
-                    <a asp-page="/Services/Service-Three">
-                        <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Massage Therapist performing the Deep Tissue Massage"
-                        src="~/images/pexels-antoni-shkraba-4599374.jpg" asp-append-version="true" width="800px" height="533px" />
-                        
-                    </a>
-                </div>
-                <div class="col-12 col-lg d-flex align-items-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Deep Tissue Massage</h4>
-                        <p>
-                            Our Deep Tissue Massage delves into the deeper muscle layers to alleviate persistent tension with slow,
-                            concentrated strokes.
-                        </p>
-                        <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Three">Learn More</a>
+                    <div class="col-12 col-lg order-1 order-lg-2 px-0">
+                        <a asp-page="/Services/Sports-Massage">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Massage Therapist performing the Sports Massage"
+                                 src="~/images/pexels-ryutaro-tsukata-5473182.jpg" asp-append-version="true" width="800px" height="533px">
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card border border-2 mx-lg-4 d-flex flex-column">
-            <div class="row justify-content-evenly g-0">
-                <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Relaxation Massage</h4>
-                        <p>
-                            Unwind with our Relaxation Massage, tailored to soothe upper body muscle knots and postural tension through a personalized approach.
-                        </p>
-                        <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Four">Learn More</a>
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg px-0">
+                        <a asp-page="/Services/Deep-Tissue-Massage">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Massage Therapist performing the Deep Tissue Massage"
+                                 src="~/images/pexels-antoni-shkraba-4599374.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Deep Tissue Massage</h4>
+                            <p class="card-text">
+                                Our Deep Tissue Massage delves into the deeper muscle layers to alleviate persistent tension with slow,
+                                concentrated strokes.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Deep-Tissue-Massage">Learn More</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg order-1 order-lg-2 d-flex justify-content-end">
-                    <a asp-page="/Services/Service-Four">
-                        <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Massage Therapist performing the Relaxation Massage"
-                        src="~/images/pexels-cottonbro-studio-3997981-resized.jpg" asp-append-version="true" width="800px" height="533px" />
-                        
-                    </a>
+            </div>
+
+            <div class="card border border-2">
+                <div class="row">
+                    <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Relaxation Massage</h4>
+                            <p class="card-text">
+                                Unwind with our Relaxation Massage, tailored to soothe upper body muscle knots and postural tension through a personalized approach.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Relaxation-Massage">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg order-1 order-lg-2 px-0">
+                        <a asp-page="/Services/Relaxation-Massage">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Massage Therapist performing the Relaxation Massage"
+                                 src="~/images/pexels-cottonbro-studio-3997981.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
