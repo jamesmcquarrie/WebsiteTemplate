@@ -1,0 +1,249 @@
+﻿@page
+@model BeyondMassagesApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+@*Hero*@
+
+
+<section>
+    <div class="container-fluid p-0">
+        <div class="hero-image">
+            <div class="text-light text-center">
+                <h1 class="display-3">Hero Title</h1>
+                <p class="fs-4">Some subtext to go here</p>
+                <a class="btn btn-outline-success btn-lg rounded-0 mt-3" role="button" asp-page="/Services/Index">Browse our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*About*@
+
+
+<section id="about">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center bg-secondary py-4 py-sm-5">
+                <img class="img-fluid" alt="Business Owner" src="~/images/pexels-italo-melo-2379004.jpg"
+                     asp-append-version="true" width="400px" height="533px"/>
+            </div>
+
+            <div class="col-12 col-lg-6 py-4 py-sm-5">
+                <div class="text-container-sm-75 text-container-xxxl-50">
+                    <h2 class="display-5 text-center text-lg-center pb-4">About</h2>
+                    <div>
+                        <p>
+                            Diam vel voluptua ea accusam luptatum sea nisl kasd sit justo takimata sanctus autem
+                            hendrerit eos accusam aliquam amet invidunt te invidunt clita et vel dolore sit dolore
+                            eos qui ea dolor ea nonumy erat at doming accusam no duis sadipscing placerat liber nonumy sea
+                        </p>
+                        <p>
+                            Amet dolor duo tempor dolore in eirmod et erat takimata sed consequat aliquam sit facilisis
+                            justo tempor molestie hendrerit invidunt velit diam et assum ad diam lorem dolor duo sadipscing
+                            ipsum lorem aliquyam ea ea lorem at molestie invidunt lorem
+                        </p>
+                        <p class="mb-0">
+                            Amet tempor feugiat dolore tempor veniam diam dolor nonummy ut sanctus takimata stet lorem at
+                            gubergren aliquyam autem eirmod sanctus esse sed dolor feugiat ipsum kasd cum lobortis invidunt 
+                            lorem elitr accusam gubergren diam at amet diam consequat sit sanctus amet amet nobis in stet 
+                            sit esse doming diam sanctus
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Services*@
+
+
+<section class="bg-primary py-4 py-sm-5">
+    <div class="container-fluid">
+        <h2 class="display-5 text-center text-lg-center pb-4 pb-sm-5">Services</h2>
+
+        <div class="row justify-content-evenly mx-lg-4">
+            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card mb-4 mb-xxl-0 mx-2">
+                    <a asp-page="/Services/Service-One">
+                        <img class="img-fluid card-img-top" alt="Service One"
+                        src="~/images/pexels-leon-ardho-1552242.jpg" asp-append-version="true" width="800px" height="533px" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title">Service One</h4>
+                        <p>
+                            Duo rebum sit ut iriure lorem nonumy lorem erat voluptua sea facer duo kasd vel nisl sit liber sed sadipscing.
+                        </p>
+                        <a class="align-self-start btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-One">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card mb-4 mb-xxl-0 mx-2">
+                    <a asp-page="/Services/Service-Two">
+                        <img class="img-fluid card-img-top" alt="Service Two"
+                        src="~/images/pexels-pixabay-416778.jpg" asp-append-version="true" width="800px" height="533px" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title">Service Two</h4>
+                        <p>
+                            Dolore ea commodo et aliquyam eum no takimata sea takimata at sea magna nulla aliquyam diam at at feugiat
+                            possim sanctus diam lobortis vero dolore erat sea.
+                        </p>
+                        <a class="align-self-start btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Two">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card mb-4 mb-sm-0 mx-2">
+                    <a asp-page="/Services/Service-Three">
+                        <img class="img-fluid card-img-top" alt="Service Three"
+                        src="~/images/pexels-li-sun-2294361.jpg" asp-append-version="true" width="800px" height="533px" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title">Service Three</h4>
+                        <p>
+                            Ea sed dolores lorem aliquyam et aliquyam vero ipsum illum dolor erat dolor amet magna amet et 
+                            dolor amet sed nonumy dolores lobortis sed accusam.
+                        </p>
+                        <a class="align-self-start btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Three">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="card mx-2">
+                    <a asp-page="/Services/Service-Four">
+                        <img class="img-fluid card-img-top" alt="Service Four"
+                        src="~/images/pexels-victor-freitas-841130.jpg" asp-append-version="true" width="800px" height="533px" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title">Service Four</h4>
+                        <p>
+                            Nonumy nonumy magna in kasd et sit kasd et diam et vero nulla sit elitr molestie in diam clita diam dolor augue.
+                        </p>
+                        <a class="align-self-start btn btn-info rounded-0 mt-auto text-light" role="button" asp-page="/Services/Service-Four">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*Testimonials*@
+
+
+<section class="bg-primary-subtle py-4 py-sm-5">
+    <div class="container-fluid">
+        <h2 class="display-5 text-center pb-4 pb-sm-5">Testimonials</h2>
+
+        <div class="row mx-sm-2 d-flex justify-content-evenly">
+            <div class="col-12 col-xxl-3 justify-content-center text-container-lg-75 mb-4">
+                <figure>
+                    <blockquote class="blockquote">
+                        <svg class="quotation-mark svg-dimensions" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                        </svg>
+                        <p>
+                            Te et consetetur et et eos justo nonumy et ut magna sed sed diam elit rebum elitr
+                            consetetur dolor justo justo ipsum et vulputate dolor
+                        </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Ashley
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xxl-3 justify-content-center text-container-lg-75 mb-4">
+                <figure>
+                    <blockquote class="blockquote">
+                        <svg class="quotation-mark svg-dimensions" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                        </svg>
+                        <p>
+                            Est sea at ut sea et blandit at amet no ut sit imperdiet justo amet sed amet sanctus consectetuer
+                            consectetuer wisi sanctus et amet sea invidunt duo diam
+                        </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        Jeremy
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="col-12 col-xxl-3 justify-content-center text-container-lg-75">
+                <figure class="mb-0">
+                    <blockquote class="blockquote">
+                        <svg class="quotation-mark svg-dimensions" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z" />
+                        </svg>
+                        <p>
+                            Sea in est stet odio ut amet vero consetetur vulputate dolor et est diam aliquyam eum rebum
+                        </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mb-0">
+                        Malia
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Contact Form *@
+
+
+<section id="contact" class="bg-primary py-4 py-sm-5">
+    <div class="container">
+        <form id="contactForm" class="d-flex justify-content-center" method="post" autocomplete="off" novalidate>
+            <div class="col-12 col-lg-8 bg-secondary p-3 p-sm-5">
+                <h2 class="display-6 fw-normal mb-3">Get In Touch</h2>
+                <div class="row mb-3">
+                    <div class="vstack gap-1">
+                        <div><i class="bi bi-telephone-fill"></i> 123-456-7890</div>
+                        <div class="text-break"><i class="bi bi-envelope-fill"></i> info@CompanyName.com</div>
+                        <div><i class="bi bi-geo-alt-fill"></i> Address</div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.Name" type="text" class="form-control box-up-input shadow-none fw-medium" placeholder="Name" aria-label="Name">
+                    <label asp-for="EmailDetails.Name"></label>
+                    <span asp-validation-for="EmailDetails.Name" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.EmailAddress" type="email" class="form-control box-up-input shadow-none fw-medium" placeholder="Email" aria-label="Email">
+                    <label asp-for="EmailDetails.EmailAddress"></label>
+                    <span asp-validation-for="EmailDetails.EmailAddress" class="text-danger" />
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="EmailDetails.Subject" type="text" class="form-control box-up-input shadow-none fw-medium" placeholder="Subject" aria-label="Subject">
+                    <label asp-for="EmailDetails.Subject"></label>
+                    <span asp-validation-for="EmailDetails.Subject" class="text-danger" />
+                </div>
+                 
+                <div class="form-floating mb-3">
+                    <textarea asp-for="EmailDetails.Message" class="form-control bordered-textarea shadow-none textarea-large textarea-pre-line fw-medium" placeholder="Message" aria-label="Message"></textarea>
+                    <label asp-for="EmailDetails.Message"></label>
+                    <span asp-validation-for="EmailDetails.Message" class="text-danger" />
+                </div>
+
+                <button id="submitButton" type="submit" class="btn btn-info rounded-0 mb-0 text-light">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/submitForm.js" asp-append-version="true"></script>
+    <script src="~/js/indexInit.js" asp-append-version="true"></script>
+}

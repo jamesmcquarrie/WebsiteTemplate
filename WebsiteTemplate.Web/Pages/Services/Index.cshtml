@@ -1,0 +1,106 @@
+﻿@page
+@model BeyondMassagesApp.Pages.Services.IndexModel
+@{
+    ViewData["Title"] = "Services";
+}
+
+@*Hero*@
+
+
+<section class="d-flex align-items-center hero-section bg-primary py-5">
+    <div class="container">
+        <div class="row text-center">
+            <h1 class="display-5 fw-normal mb-0">Services</h1>
+        </div>
+    </div>
+</section>
+
+@*Services*@
+
+<section class="bg-light-subtle py-4 py-sm-5">
+    <div class="container-fluid container-sm">
+        <div class="row row-cols-1 mx-lg-4 mx-2">
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg px-0">
+                        <a asp-page="/Services/Service-One">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Service One"
+                                 src="~/images/pexels-leon-ardho-1552242.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Service One</h4>
+                            <p class="card-text">
+                                Duo rebum sit ut iriure lorem nonumy lorem erat voluptua sea facer duo kasd vel nisl sit liber sed sadipscing.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-One">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Service Two</h4>
+                            <p class="card-text">
+                                Dolore ea commodo et aliquyam eum no takimata sea takimata at sea magna nulla aliquyam diam at at feugiat
+                                possim sanctus diam lobortis vero dolore erat sea.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Two">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg order-1 order-lg-2 px-0">
+                        <a asp-page="/Services/Service-Two">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Service Two"
+                                 src="~/images/pexels-pixabay-416778.jpg" asp-append-version="true" width="800px" height="533px">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border border-2 mb-4">
+                <div class="row">
+                    <div class="col-12 col-lg px-0">
+                        <a asp-page="/Services/Service-Three">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-start-lg-1" alt="Service Three"
+                                 src="~/images/pexels-li-sun-2294361.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Service Three</h4>
+                            <p class="card-text">
+                                Ea sed dolores lorem aliquyam et aliquyam vero ipsum illum dolor erat dolor amet magna amet et
+                                dolor amet sed nonumy dolores lobortis sed accusam.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Three">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border border-2">
+                <div class="row">
+                    <div class="col-12 col-lg order-2 order-lg-1 d-flex align-items-center px-0 px-lg-2">
+                        <div class="card-body">
+                            <h4 class="card-title">Service Four</h4>
+                            <p class="card-text">
+                                Nonumy nonumy magna in kasd et sit kasd et diam et vero nulla sit elitr molestie in diam clita diam dolor augue.
+                            </p>
+                            <a class="align-self-start btn btn-info rounded-0 text-light" role="button" asp-page="/Services/Service-Four">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg order-1 order-lg-2 px-0">
+                        <a asp-page="/Services/Service-Four">
+                            <img class="img-fluid rounded-top-1 rounded-top-lg-0 rounded-end-lg-1" alt="Service Four"
+                                 src="~/images/pexels-victor-freitas-841130.jpg" asp-append-version="true" width="800px" height="533px" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
