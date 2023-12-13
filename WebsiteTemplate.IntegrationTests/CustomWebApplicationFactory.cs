@@ -13,11 +13,7 @@ public class CustomWebApplicationFactory :  WebApplicationFactory<Program>
     {
         builder.ConfigureServices(services =>
         {
-            services.AddRazorPages()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
-                });
+            services.AddRazorPages(options => options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
         });
     }
 }

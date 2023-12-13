@@ -5,51 +5,55 @@ using WebsiteTemplate.Web.Features.Contact.Common;
 using Microsoft.Extensions.Options;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Polly.Registry;
 using Polly;
 
 namespace WebsiteTemplate.Web.Features.Contact.Services;
 
-public class EmailService : IEmailService
+public class EmailService
 {
     private readonly ILogger<EmailService> _logger;
-    private readonly IEmailBuilder _emailBuilder;
+    private readonly EmailBuilder _emailBuilder;
     private readonly EmailOptions _emailOptions;
-    private readonly ISmtpClient _smtpClient;
-    private readonly IAsyncPolicy _policy; 
+    private readonly SmtpClient _smtpClient;
+    private readonly ResiliencePipelineProvider<string> _pipelineProvider; 
 
     public EmailService(ILogger<EmailService> logger,
-        IEmailBuilder emailBuilder,
+        EmailBuilder emailBuilder,
         IOptions<EmailOptions> emailOptions, 
-        ISmtpClient smtpClient,
-        IAsyncPolicy policy)
+        SmtpClient smtpClient,
+        ResiliencePipelineProvider<string> pipelineProvider)
     {
         _logger = logger;
         _emailBuilder = emailBuilder;
         _emailOptions = emailOptions.Value;
         _smtpClient = smtpClient;
-        _policy = policy;
+        _pipelineProvider = pipelineProvider;
     }
 
     public async Task<EmailResult> SendEmailAsync(EmailModel emailModel, CancellationToken cancellationToken = default)
     {
         var email = _emailBuilder.CreateMultipartEmail(emailModel);
+        _logger.LogInformation("Email has been constructed");
+
         var emailResult = new EmailResult();
 
         try
         {
-            await _policy.ExecuteAsync(async ct =>
+            var policy = _pipelineProvider.GetPipeline(ResilienceStrategies.SmtpCommandPolicy);
+
+            await policy.ExecuteAsync(async ct =>
             {
                 await ConnectAsync(ct);
                 await AuthenticateAsync(ct);
 
-                await _smtpClient.SendAsync(email,
-                    ct);
+                await _smtpClient.SendAsync(email, ct);
 
                 emailResult.IsSent = true;
                 emailResult.Message = StatusMessages.SuccessMessage;
 
                 _logger.LogInformation("Email has been sent successfully");
-            }, cancellationToken);
+            }, cancellationToken); // Ensure this is the correct CancellationToken
 
             return emailResult;
         }

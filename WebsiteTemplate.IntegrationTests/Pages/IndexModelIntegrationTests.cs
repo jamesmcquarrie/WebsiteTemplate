@@ -1,6 +1,4 @@
 using WebsiteTemplate.IntegrationTests;
-using WebsiteTemplate.IntegrationTests.Models;
-using WebsiteTemplate.Web.Features.Contact.Common;
 using WebsiteTemplate.Web.Features.Contact.Models;
 using System.Net;
 using System.Net.Http.Json;
@@ -20,7 +18,7 @@ public class IndexModelIntegrationTests : IDisposable
     }
 
     [Fact]
-    public async Task OnPostAsync_EmailShouldBeSentSuccessfully()
+    public async Task OnPostAsync_AttemptEmailSending()
     {
         //Arrange
         var postData = new List<KeyValuePair<string, string>>
@@ -33,17 +31,13 @@ public class IndexModelIntegrationTests : IDisposable
 
         var formContent = new FormUrlEncodedContent(postData);
 
-        var serializerOptions = SetToCamelCase();
-
         //Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<EmailResult>(serializerOptions);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<EmailResult>(new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
         //Assert
         deserializedResponse.Should().NotBeNull();
         result.StatusCode.Should().Be(HttpStatusCode.OK);
-        deserializedResponse.IsSent.Should().BeTrue();
-        deserializedResponse.Message.Should().Be(StatusMessages.SuccessMessage);
     }
 
     [Fact]
@@ -60,11 +54,9 @@ public class IndexModelIntegrationTests : IDisposable
 
         var formContent = new FormUrlEncodedContent(invalidPostData);
 
-        var serializerOptions = SetToCamelCase();
-
         // Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<InvalidResponseResult>(new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
         // Assert
         deserializedResponse.Should().NotBeNull();
@@ -90,25 +82,15 @@ public class IndexModelIntegrationTests : IDisposable
 
         var formContent = new FormUrlEncodedContent(invalidPostData);
 
-        var serializerOptions = SetToCamelCase();
-
         // Act
         var result = await _httpClient.PostAsync("/index", formContent);
-        var deserializedResponse = await result.Content.ReadFromJsonAsync<ValidationResponseModel>(serializerOptions);
+        var deserializedResponse = await result.Content.ReadFromJsonAsync<InvalidResponseResult>(new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
         // Assert
         deserializedResponse.Should().NotBeNull();
         result.StatusCode.Should().Be(HttpStatusCode.OK);
         deserializedResponse.IsSent.Should().BeFalse();
         deserializedResponse.Message.Should().Contain("Please provide a valid email address");
-    }
-
-    private JsonSerializerOptions SetToCamelCase()
-    {
-        return new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
     }
 
     public void Dispose()

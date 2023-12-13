@@ -5,15 +5,12 @@ using MimeKit;
 
 namespace WebsiteTemplate.Web.Features.Contact.Helpers;
 
-public class EmailBuilder : IEmailBuilder
+public class EmailBuilder
 {
-    private readonly ILogger<EmailBuilder> _logger;
     private readonly EmailOptions _emailOptions;
 
-    public EmailBuilder(ILogger<EmailBuilder> logger,
-        IOptions<EmailOptions> emailOptions)
+    public EmailBuilder(IOptions<EmailOptions> emailOptions)
     {
-        _logger = logger;
         _emailOptions = emailOptions.Value;
     }
 
@@ -27,8 +24,6 @@ public class EmailBuilder : IEmailBuilder
         email.Subject = $"{emailModel.Name} ({emailModel.EmailAddress}) - {emailModel.Subject}";
         email.Body = CreateBodyBuilder(emailModel.Message)
             .ToMessageBody();
-
-        _logger.LogInformation("Email has been constructed");
 
         return email;
     }

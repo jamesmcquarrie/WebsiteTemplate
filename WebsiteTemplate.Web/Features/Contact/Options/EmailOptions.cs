@@ -4,6 +4,7 @@ namespace WebsiteTemplate.Web.Features.Contact.Options;
 
 public class EmailOptions
 {
+    public const string OptionsName = "EmailOptions";
     [Required]
     public string UserName { get; set; } = string.Empty;
     [Required]

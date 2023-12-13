@@ -1,4 +1,7 @@
-﻿using WebsiteTemplate.UnitTests.Helpers;
+﻿using WebsiteTemplate.Web.Features.Contact.Helpers;
+using WebsiteTemplate.Web.Features.Contact.Models;
+using WebsiteTemplate.Web.Features.Contact.Options;
+using Microsoft.Extensions.Options;
 
 namespace WebsiteTemplate.UnitTests.Email;
 
@@ -8,9 +11,15 @@ public class EmailBuilderUnitTests
     public void CreateMultipartEmail_GivenValidInputs_SetsExpectedEmailAttributes()
     {
         //Arrange
-        var emailOptions = EmailBuilderUnitTestsHelper.GetEmailOptions();
-        var emailModel = EmailBuilderUnitTestsHelper.CreateEmailModel();
-        var emailBuilder = EmailBuilderUnitTestsHelper.CreateEmailBuilder(emailOptions);
+        var fixture = new Fixture();
+
+        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
+        emailOptions.Value
+           .Returns(fixture.Create<EmailOptions>());
+
+        var emailBuilder = new EmailBuilder(emailOptions);
+
+        var emailModel = fixture.Create<EmailModel>();
 
         //Act
         var email = emailBuilder.CreateMultipartEmail(emailModel);
@@ -26,9 +35,15 @@ public class EmailBuilderUnitTests
     public void CreateMultipartEmail_GivenValidInputs_SetsExpectedTextBody()
     {
         //Arrange
-        var emailOptions = EmailBuilderUnitTestsHelper.GetEmailOptions();
-        var emailModel = EmailBuilderUnitTestsHelper.CreateEmailModel();
-        var emailBuilder = EmailBuilderUnitTestsHelper.CreateEmailBuilder(emailOptions);
+        var fixture = new Fixture();
+
+        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
+        emailOptions.Value
+           .Returns(fixture.Create<EmailOptions>());
+
+        var emailBuilder = new EmailBuilder(emailOptions);
+
+        var emailModel = fixture.Create<EmailModel>();
 
         //Act
         var email = emailBuilder.CreateMultipartEmail(emailModel);
@@ -41,9 +56,17 @@ public class EmailBuilderUnitTests
     public void CreateMultipartEmail_GivenValidInputs_SetsExpectedHtmlBody()
     {
         //Arrange
-        var emailOptions = EmailBuilderUnitTestsHelper.GetEmailOptions();
-        var emailModel = EmailBuilderUnitTestsHelper.CreateEmailModel();
-        var emailBuilder = EmailBuilderUnitTestsHelper.CreateEmailBuilder(emailOptions);
+        var fixture = new Fixture();
+
+        var emailOptions = Substitute.For<IOptions<EmailOptions>>();
+        emailOptions.Value
+           .Returns(fixture.Create<EmailOptions>());
+
+        var emailBuilder = new EmailBuilder(emailOptions);
+
+        var emailModel = fixture.Create<EmailModel>();
+        emailModel.Message = $"{Environment.NewLine} {emailModel.Message} {Environment.NewLine}";
+
         var expectedHtmlMessage = emailModel.Message.ReplaceLineEndings( "<br>");
 
         //Act

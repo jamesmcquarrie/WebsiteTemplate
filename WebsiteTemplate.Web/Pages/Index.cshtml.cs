@@ -11,9 +11,9 @@ public class IndexModel : PageModel
     [BindProperty]
     public EmailModel EmailDetails { get; set; } = new EmailModel();
 
-    private readonly IEmailService _emailService;
+    private readonly EmailService _emailService;
 
-    public IndexModel(IEmailService emailService)
+    public IndexModel(EmailService emailService)
     {
         _emailService = emailService;
     }
