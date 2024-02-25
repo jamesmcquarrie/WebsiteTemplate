@@ -15,11 +15,7 @@ builder.Host.UseSerilog((hostContext, loggerConfiguration) =>
     loggerConfiguration.ReadFrom.Configuration(hostContext.Configuration);
 });
 
-builder.Services.AddRazorPages(options => options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()))
-.AddViewOptions(options =>
-{
-    options.HtmlHelperOptions.ClientValidationEnabled = false;
-});
+builder.Services.AddRazorPages(options => options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddHsts(options =>
