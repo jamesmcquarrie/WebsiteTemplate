@@ -1,12 +1,12 @@
 ﻿using WebsiteTemplate.Web.Features.Contact.Options;
 using WebsiteTemplate.Web.Features.Contact.Helpers;
 using WebsiteTemplate.Web.Features.Contact.Models;
-using WebsiteTemplate.Web.Features.Contact.Common;
+using WebsiteTemplate.Web.Features.Contact.Constants;
+using WebsiteTemplate.Web.Common;
 using Microsoft.Extensions.Options;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Polly.Registry;
-using Polly;
 
 namespace WebsiteTemplate.Web.Features.Contact.Services;
 
@@ -50,10 +50,10 @@ public class EmailService
                 await _smtpClient.SendAsync(email, ct);
 
                 emailResult.IsSent = true;
-                emailResult.Message = StatusMessages.SuccessMessage;
+                emailResult.Message = EmailStatusMessages.SuccessMessage;
 
                 _logger.LogInformation("Email has been sent successfully");
-            }, cancellationToken); // Ensure this is the correct CancellationToken
+            }, cancellationToken);
 
             return emailResult;
         }
@@ -61,7 +61,7 @@ public class EmailService
         catch (OperationCanceledException)
         {
             _logger.LogWarning("Email sending operation was cancelled");
-            emailResult.Message = StatusMessages.OperationCancelled;
+            emailResult.Message = EmailStatusMessages.OperationCancelled;
 
             return emailResult;
         }
@@ -69,7 +69,7 @@ public class EmailService
         catch (SmtpCommandException ex)
         {
             _logger.LogError(ex, "SMTP command error while sending email: {Message}, StatusCode: {StatusCode}", ex.Message, ex.StatusCode);
-            emailResult.Message = StatusMessages.SmtpCommandError;
+            emailResult.Message = EmailStatusMessages.SmtpCommandError;
 
             return emailResult;
         }
@@ -78,7 +78,7 @@ public class EmailService
         {
             // A general exception occurred (could be network issues or others).
             _logger.LogError(ex,"Error occurred while sending email: {Message}", ex.Message);
-            emailResult.Message = StatusMessages.GeneralError;
+            emailResult.Message = EmailStatusMessages.GeneralError;
 
             return emailResult;
         }

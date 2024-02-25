@@ -14,16 +14,10 @@
     function handleFormSubmission(e) {
         e.preventDefault();
 
-        if (pageItems.form.checkValidity()) {
+        changeSubmitButton();
+        const formData = new URLSearchParams(new FormData(pageItems.form));
 
-            changeSubmitButton();
-            const formData = new URLSearchParams(new FormData(pageItems.form));
-
-            submitEmail(formData);
-
-        } else {
-            pageItems.form.reportValidity();
-        };
+        submitEmail(formData);
     }
 
     function submitEmail(formData) {
@@ -37,17 +31,17 @@
             .then(response => response.json())
             .then(data => {
                 if (data.isSent) {
-                    displayAlert(true, data.message);
+                    displaySuccessAlert(data.message);
+                    pageItems.form.reset();
                 } else {
-                    displayAlert(false, data.message);
+                    displayErrorsAlert(data.errorMessages);
                 }
             })
             .catch(() => {
-                const errorMessage = 'There was an unexpected error while sending the email. Please try again later';
-                displayAlert(false, errorMessage);
+                const errorMessage = ['There was an unexpected error while sending the email. Please try again later'];
+                displayErrorAlert(errorMessage);
             })
             .finally(() => {
-                pageItems.form.reset();
                 resetSubmitButton();
             });
     }
@@ -81,26 +75,48 @@
         pageItems.submitButton.disabled = false
     }
 
-    function displayAlert(isSuccess, message) {
+    function displaySuccessAlert(message) {
         const fragment = new DocumentFragment();
         const alert = document.createElement('div');
         const icon = document.createElement('i');
-        const textNode = document.createTextNode(` ${message}`);
+        const textNode = document.createTextNode(message);
         const closeButton = document.createElement('button');
+
+        icon.className = 'bi bi-check-circle-fill me-2';
+        alert.className = `alert alert-success alert-dismissible fade show mt-3 mb-0`;
 
         closeButton.type = 'button';
         closeButton.className = 'btn-close';
         closeButton.dataset.bsDismiss = 'alert';
 
-        if (isSuccess) {
-            icon.className = 'bi bi-check-circle-fill';
-            alert.className = `alert alert-success alert-dismissible fade show mt-3 mb-0`;
-        } else {
-            icon.className = 'bi bi-x-circle-fill';
-            alert.className = `alert alert-danger alert-dismissible fade show mt-3 mb-0`;
+        fragment.append(icon, textNode, closeButton);
+        alert.appendChild(fragment);
+
+        pageItems.submitButton.insertAdjacentElement('afterend', alert);
+    }
+
+    function displayErrorsAlert(errors) {
+        const fragment = new DocumentFragment();
+        const errorFragment = new DocumentFragment();
+        const alert = document.createElement('div');
+        const closeButton = document.createElement('button');
+
+        alert.className = 'alert alert-danger alert-dismissible fade show mt-3 mb-0';
+
+        closeButton.type = 'button';
+        closeButton.className = 'btn-close';
+        closeButton.dataset.bsDismiss = 'alert';
+
+        for (const error of errors) {
+            const icon = document.createElement('i');
+            icon.className = 'bi bi-x-circle-fill me-2';
+
+            const textNode = document.createTextNode(error);
+            const messagebreak = document.createElement('br');
+            errorFragment.append(icon, textNode, messagebreak)
         }
 
-        fragment.append(icon, textNode, closeButton);
+        fragment.append(errorFragment, closeButton);
         alert.appendChild(fragment);
 
         pageItems.submitButton.insertAdjacentElement('afterend', alert);

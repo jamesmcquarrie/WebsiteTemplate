@@ -6,6 +6,8 @@ using System.Net;
 
 namespace BeyondMassagesApp.Pages;
 
+[ProducesResponseType(StatusCodes.Status201Created, Type = typeof(EmailResult))]
+[ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(InvalidResponseResult))]
 public class IndexModel : PageModel
 {
     [BindProperty]
@@ -27,14 +29,20 @@ public class IndexModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            var errors = ModelState.SelectMany(x => x.Value!.Errors.Select(e => e.ErrorMessage)).ToList();
-            return new JsonResult(new { isSent = false, message = errors });
+            var invalidResponseResult = new InvalidResponseResult
+            {
+                IsSent = false,
+                ErrorMessages = ModelState.SelectMany(x => x.Value!.Errors)
+                    .Select(e => e.ErrorMessage)
+            };
+
+            return new UnprocessableEntityObjectResult(invalidResponseResult);
         }
 
         SanitizeFormInput();
         var emailResult = await _emailService.SendEmailAsync(EmailDetails, HttpContext.RequestAborted);
 
-        return new JsonResult(new { isSent = emailResult.IsSent, message = emailResult.Message });
+        return new CreatedResult(nameof(OnPostAsync), emailResult);
     }
 
     private void SanitizeFormInput()

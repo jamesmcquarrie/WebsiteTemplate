@@ -1,4 +1,4 @@
-﻿namespace WebsiteTemplate.Web.Features.Contact.Common;
+﻿namespace WebsiteTemplate.Web.Common;
 
 public static class ResilienceStrategies
 {

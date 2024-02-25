@@ -1,8 +1,9 @@
-using WebsiteTemplate.Web.Features.Contact.Common;
 using WebsiteTemplate.Web.Features.Contact.Models;
 using WebsiteTemplate.Web.Features.Contact.Options;
 using WebsiteTemplate.Web.Features.Contact.Helpers;
 using WebsiteTemplate.Web.Features.Contact.Services;
+using WebsiteTemplate.Web.Features.Contact.Constants;
+using WebsiteTemplate.Web.Common;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using NSubstitute.ExceptionExtensions;
@@ -39,7 +40,7 @@ public class EmailServiceUnitTests
         //Assert
         await smtpClient.Received().SendAsync(Arg.Any<MimeMessage>());
         result.IsSent.Should().BeTrue();
-        result.Message.Should().Be(StatusMessages.SuccessMessage);
+        result.Message.Should().Be(EmailStatusMessages.SuccessMessage);
     }
 
     [Fact]
@@ -60,7 +61,7 @@ public class EmailServiceUnitTests
 
         var emailModel = new Fixture().Create<EmailModel>();
 
-        var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, StatusMessages.SmtpCommandError);
+        var smtpCommandException = new SmtpCommandException(SmtpErrorCode.MessageNotAccepted, SmtpStatusCode.InsufficientStorage, EmailStatusMessages.SmtpCommandError);
         smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(smtpCommandException);
 
@@ -69,7 +70,7 @@ public class EmailServiceUnitTests
 
         //Assert
         result.IsSent.Should().BeFalse();
-        result.Message.Should().Be(StatusMessages.SmtpCommandError);
+        result.Message.Should().Be(EmailStatusMessages.SmtpCommandError);
     }
 
     [Fact]
@@ -99,7 +100,7 @@ public class EmailServiceUnitTests
 
         //Assert
         result.IsSent.Should().BeFalse();
-        result.Message.Should().Be(StatusMessages.OperationCancelled);
+        result.Message.Should().Be(EmailStatusMessages.OperationCancelled);
     }
 
     [Fact]
@@ -120,7 +121,7 @@ public class EmailServiceUnitTests
 
         var emailModel = new Fixture().Create<EmailModel>();
 
-        var exception = new Exception(StatusMessages.GeneralError);
+        var exception = new Exception(EmailStatusMessages.GeneralError);
         smtpClient.SendAsync(Arg.Any<MimeMessage>())
             .ThrowsAsync(exception);
 
@@ -129,16 +130,15 @@ public class EmailServiceUnitTests
 
         //Assert
         result.IsSent.Should().BeFalse();
-        result.Message.Should().Be(StatusMessages.GeneralError);
+        result.Message.Should().Be(EmailStatusMessages.GeneralError);
     }
 
     private IOptions<EmailOptions> SetupEmailOptions()
     {
-        const string SECURE_SOCKET_OPTION = "StartTls";
         var emailOptions = Substitute.For<IOptions<EmailOptions>>();
         emailOptions.Value
             .Returns(new Fixture().Create<EmailOptions>());
-        emailOptions.Value.SecureSocketOptions = SECURE_SOCKET_OPTION;
+        emailOptions.Value.SecureSocketOptions = "StartTls";
 
         return emailOptions;
     }

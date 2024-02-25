@@ -1,8 +1,8 @@
-﻿namespace WebsiteTemplate.Web.Features.Contact.Common;
+﻿namespace WebsiteTemplate.Web.Features.Contact.Constants;
 
-public static class StatusMessages
+public static class EmailStatusMessages
 {
-    public const string SuccessMessage = "Email has been sent successfully";
+    public const string SuccessMessage = "Email has been sent successfully!";
     public const string AuthenticationFailed = "Client not authenticated to server";
     public const string OperationCancelled = "Email sending operation was cancelled";
     public const string SmtpCommandError = "There was an error sending the email. Please try again later";

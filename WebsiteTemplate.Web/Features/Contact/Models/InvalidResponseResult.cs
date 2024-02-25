@@ -3,5 +3,5 @@
 public class InvalidResponseResult
 {
     public bool IsSent { get; set; }
-    public List<string>? Message { get; set; }
+    public IEnumerable<string> ErrorMessages { get; set; } = new List<string>();
 }

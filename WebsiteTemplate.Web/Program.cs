@@ -1,7 +1,7 @@
 using WebsiteTemplate.Web.Features.Contact.Helpers;
-using WebsiteTemplate.Web.Features.Contact.Common;
 using WebsiteTemplate.Web.Features.Contact.Options;
 using WebsiteTemplate.Web.Features.Contact.Services;
+using WebsiteTemplate.Web.Common;
 using Microsoft.AspNetCore.Mvc;
 using Joonasw.AspNetCore.SecurityHeaders;
 using MailKit.Net.Smtp;
@@ -15,7 +15,11 @@ builder.Host.UseSerilog((hostContext, loggerConfiguration) =>
     loggerConfiguration.ReadFrom.Configuration(hostContext.Configuration);
 });
 
-builder.Services.AddRazorPages(options => options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()));
+builder.Services.AddRazorPages(options => options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()))
+.AddViewOptions(options =>
+{
+    options.HtmlHelperOptions.ClientValidationEnabled = false;
+});
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddHsts(options =>
@@ -68,21 +72,17 @@ else
     {
         options.ByDefaultAllow
             .FromSelf();
-
         options.AllowScripts
             .FromSelf();
-
         options.AllowStyles
             .FromSelf()
             .From("https://cdn.jsdelivr.net")
             .From("https://fonts.googleapis.com");
-
         options.AllowFonts
             .FromSelf()
             .From("https://cdn.jsdelivr.net")
             .From("https://fonts.googleapis.com")
             .From("https://fonts.gstatic.com");
-
         options.AllowImages
             .FromSelf()
             .From("data: https://www.w3.org");        
